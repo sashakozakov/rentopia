@@ -1,0 +1,162 @@
+.module_tiles_blocks {
+	position: relative;
+
+	.svg {
+		position: absolute;
+		@include max(md) {
+			height: auto;
+			max-width: rem(200);
+		}
+
+		&_9 {
+			top: rem(22);
+			left: 0;
+		}
+
+		&_10 {
+			top: 42%;
+			right: 0;
+		}
+	}
+
+	.container {
+		position: relative;
+		gap: rem(40);
+		@include min(md) {
+			gap: rem(65);
+		}
+		@include min(lg) {
+			gap: rem(92);
+		}
+	}
+
+	&--content {
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			@include min(sm) {
+				letter-spacing: 1px;
+			}
+			@include min(md) {
+				letter-spacing: 2px;
+			}
+			@include min(lg) {
+				letter-spacing: 3px;
+			}
+		}
+	}
+}
+
+.tiles_blocks {
+	width: 100%;
+	padding-bottom: rem(60);
+	@include min(xl) {
+		padding-bottom: rem(100);
+	}
+
+	@include min(lg) {
+		overflow: visible;
+
+		.swiper-wrapper {
+			row-gap: rem(30);
+			justify-content: center;
+			padding: 0 10px;
+			flex-wrap: wrap;
+
+			.swiper-slide {
+				width: calc(100% / 3);
+				padding: rem(0 15);
+				height: auto;
+			}
+		}
+
+		.swiper-pagination {
+			margin-top: 0;
+			position: static;
+		}
+
+		.swiper-notification {
+			display: none;
+		}
+	}
+
+	&--img {
+		display: block;
+		width: 100%;
+
+		> div {
+			position: relative;
+			padding-bottom: 83.5%;
+			@include min(sm) {
+				padding-bottom: 151%;
+			}
+
+			img {
+				//608
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 100%;
+				object-fit: cover;
+				object-position: center;
+			}
+		}
+	}
+
+	&--item {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		height: auto;
+
+		//@include min(sm) {
+		//	@include max(lg) {
+		//		&:nth-child(even) {
+		//			flex-direction: column-reverse;
+		//			transform: translateY(rem(60));
+		//		}
+		//	}
+		//}
+		@include min(lg) {
+			&:nth-child(3n-1) {
+				flex-direction: column-reverse;
+				transform: translateY(rem(60));
+				@include min(xl) {
+					transform: translateY(rem(100));
+				}
+			}
+		}
+
+		> img {
+			width: 100%;
+		}
+
+		.content_block {
+			background: $b;
+			line-height: 1.8;
+			flex: 1 1;
+			padding: rem(20 15 10);
+			@include min(xl) {
+				padding: rem(26 32 12);
+			}
+
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				margin-bottom: 10px;
+			}
+
+			* {
+				color: $w;
+			}
+		}
+	}
+}

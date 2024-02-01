@@ -1,0 +1,112 @@
+.hero_section {
+	height: 91vh;
+	max-height: 564px;
+	position: relative;
+	padding: rem(98 0 80);
+	border-radius: rem(0 0 268 0);
+	@include min(sm) {
+		padding: rem(185 0 80);
+		border-radius: 0;
+		height: 80vh;
+		max-height: 802px;
+	}
+
+	& + .mt-sm {
+		margin-top: 63px;
+	}
+
+	.page-template-template-portfolio & {
+		@include min(sm) {
+			padding-top: rem(156);
+		}
+		@include max(sm) {
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+		}
+	}
+
+	> svg {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: auto;
+	}
+
+	.breadcrumbs {
+		color: $w;
+		margin-bottom: rem(82);
+
+		a,
+		.breadcrumb_last {
+			color: $w;
+		}
+	}
+
+	.container {
+		position: relative;
+	}
+
+	.editor {
+		margin: 0 auto;
+		max-width: rem(1030);
+		@include headings {
+			line-height: 1.2;
+			margin-bottom: 10px;
+			@include min(sm) {
+				margin-bottom: 20px;
+			}
+		}
+
+		p, li {
+			@include max(sm) {
+				font-weight: 500;
+				letter-spacing: 1.5px;
+			}
+		}
+	}
+
+	.search_banner__form {
+		margin-top: clamp-rem(50, 131, 575, 1200);
+	}
+}
+
+
+.mobile_search__form_btn {
+	position: fixed;
+	right: 24px;
+	bottom: 24px;
+	border-radius: 50%;
+	background: $primary;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	width: rem(60);
+	height: rem(60);
+	z-index: 9;
+}
+
+.mobile_search__form {
+	position: fixed;
+	padding: 20px 41px 40px;
+	background: $w;
+	z-index: 10;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border-radius: rem(15 15 0 0);
+	display: none;
+
+	form {
+		> div {
+			margin-bottom: 30px;
+		}
+
+		button {
+			@extend .btn;
+			width: 100%;
+		}
+	}
+}

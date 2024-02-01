@@ -1,0 +1,80 @@
+.module_why_us {
+	position: relative;
+
+	.svg {
+		@include max(md) {
+			height: auto;
+			max-width: rem(200);
+		}
+
+		&_6 {
+			position: absolute;
+			left: 0;
+			top: rem(12);
+		}
+	}
+
+	.container {
+		gap: rem(35);
+		position: relative;
+	}
+
+	&--content {
+	}
+
+	&__slider {
+		width: 100%;
+		@include min(lg) {
+			overflow: visible;
+
+			.swiper-wrapper {
+				row-gap: rem(30);
+				justify-content: center;
+				padding: 0 10px;
+				flex-wrap: wrap;
+
+				.swiper-slide {
+					width: calc(100% / 3);
+					padding: rem(0 15);
+					height: auto;
+				}
+			}
+		}
+
+		.swiper-pagination {
+			margin-top: 20px;
+			position: static;
+		}
+
+		.swiper-notification {
+			display: none;
+		}
+	}
+
+	.block_item {
+		height: 100%;
+		border: 1px solid $b;
+		background: $light;
+		padding: rem(30 15 15);
+		@include min(md) {
+			padding: rem(45 20 20);
+		}
+		@include min(xl) {
+			padding: rem(61 32 23);
+		}
+
+		&--img {
+			margin-bottom: rem(50);
+			height: rem(137);
+
+			img {
+				max-height: 100%;
+				max-width: 100%;
+			}
+		}
+
+		&--title {
+			margin-bottom: rem(15);
+		}
+	}
+}

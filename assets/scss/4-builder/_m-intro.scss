@@ -1,0 +1,53 @@
+.module_intro {
+	position: relative;
+	@include min(sm) {
+		padding: 135px 0 0;
+	}
+
+	&--img {
+		@include min(sm) {
+			position: absolute;
+			top: 0;
+			right: 0;
+			max-height: 100%;
+			object-position: top right;
+			max-width: 60%;
+		}
+		@include min(md) {
+			max-width: 68%;
+		}
+		@include min(lg) {
+			max-width: 72%;
+			opacity: 1;
+		}
+		@include min(xl) {
+			max-width: 62%;
+		}
+	}
+
+	.container {
+		position: relative;
+	}
+
+	&--content {
+		padding: 20px 0 0;
+		@include min(md) {
+			padding: 100px 0 40px;
+		}
+		@include min(lg) {
+			padding: 170px 0 60px;
+		}
+		@include min(xl) {
+			padding: rem(224 0 80);
+		}
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin-bottom: rem(15);
+	}
+}

@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+// Colors -------------------------------------------
+$primary: #01ccad;
+$light: #fffdfa;
+$grey: #9f9a93;
+$b: #2a2f38;
+$hr: #E7E3E2;
+$purple: #F67282;
+$active: #01CCAD;
+$active_bg: rgba($active, .2);
+$no_active: #FB4E63;
+$no_active_bg: rgba($no_active, .2);
+$draft: #FDB600;
+$draft_bg: rgba($draft, .2);
+$color-text: $b;
+
+
+
+$primary-hover: darken($primary, 10%);
+$secondary: #38bdf8;
+$secondary-hover: darken($secondary, 8%);
+
+$w: #fff;
+$white-50: rgba($w, 0.5);
+$grey: #bdbdbd;
+$grey-border: #d0d0d0;
+$red: #FB4E63;
+
+$green: #6dc22e;
+$orange: #f56e28;
+$yellow: #f2c94c;
+$blue: #00a0d2;
+
+$color-heading: #202634;
+$color-link: $primary;
+$color-link-hover: $primary-hover;
+
+
+// Fonts -------------------------------------------
+$font-text: "Inter", "Arial", sans-serif;
+$font-heading: "Albra", "Arial", sans-serif;
+
+$font-code: "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
+$font-pre: "Courier 10 Pitch", "Courier", monospace;
+
+
+// Typography -------------------------------------------
+$font-size-base: 16; // Assumes the browser default (typically 16px)
+$font-weight-base: 400;
+$line-height-base: 1.6;
+
+$radius: rem(5); // global border-radius (can be 0, but need to keep it)
+
+
+// Transitions -------------------------------------------
+$time: 0.3s;
+$default-transition: all $time 0s;
+
+
+// Grid breakpoints -------------------------------------------
+// for min-width = values, for max-width = value - 1px.
+// example: @include min(lg) = @media (min-width: 1025px)
+// example: @include max(lg) = @media (max-width: 1024px)
+$grid-breakpoints: (
+	xs: 0,
+	sm: 641px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	xxl: 1441px,
+);
+
+// Grid columns
+// Set the number of columns and specify the width of the gutters.
+$grid-columns: 12;
+$grid-gutter-width: 30px; // 15px on each side
+
+// Grid containers
+// Define the maximum width of `.container` for different screen sizes.
+$container-max-widths: (
+	xs: 100%,
+	md: 800px,
+	lg: 980px,
+	xl: 1330px,
+	xxl: 1530px,
+);
+
+// Container padding
+$container-gutter-x-values: (
+	xs: 30px, // 15px on each side
+	md: 30px, // 30px on each side
+	lg: 30px, // 50px on each side
+	xl: 30px, // 50px on each side
+	xxl: 30px, // 50px on each side
+);
+
+// Container fluid maximum width
+$container-fluid-max-width: 1920px;
+
+/*
+ * Global CSS Variables:
+ */
+:root {
+	--container-width: 100%;
+
+	@each $bp in map-keys($grid-breakpoints) {
+		@media (min-width: map-get($grid-breakpoints, $bp)) {
+			--container-width: #{map-get($container-max-widths, $bp)};
+			--container-gutter-x: #{map-get($container-gutter-x-values, $bp)};
+		}
+	}
+
+	--header-height: #{rem(100)}; // needed for fixed header
+	--header-scrolled-height: #{rem(70)}; // needed for fixed header
+}

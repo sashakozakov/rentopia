@@ -1,0 +1,232 @@
+html {
+	box-sizing: border-box; // _sanitize.scss already applied this for all other elements
+	scroll-behavior: smooth; // CSS only 'smooth scroll to anchor' functionality
+	overflow-x: hidden;
+}
+
+*,
+*:active,
+*:focus {
+	outline: 0 !important; // remove outlines from all elements
+}
+
+body {
+	min-width: 360px;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	background: $w; // Fallback for when there is no custom background color defined.
+	color: $color-text;
+	font-size: rem($font-size-base);
+	font-family: $font-text;
+	font-weight: $font-weight-base;
+	line-height: $line-height-base;
+	-webkit-font-smoothing: antialiased; // sass-lint:disable-line no-vendor-prefixes
+	-moz-osx-font-smoothing: grayscale; // sass-lint:disable-line no-vendor-prefixes
+	overflow-x: hidden;
+	//padding-top: var(--header-height);
+	transition: padding-top $time;
+
+	&.is-menu-open {
+		overflow: hidden;
+	}
+
+	&.is-scrolled {
+		//padding-top: var(--header-scrolled-height);
+	}
+
+	&.has-hero {
+		padding-top: 0;
+	}
+}
+
+
+p, li {
+	letter-spacing: .5px;
+}
+
+img {
+	height: auto; // Make sure images are scaled correctly.
+	max-width: 100%; // Adhere to container width.
+}
+
+figure {
+	margin: rem(20 0);
+}
+
+p {
+	margin-top: 0;
+	margin-bottom: rem(20);
+}
+
+// Links
+a {
+	color: $color-link;
+	text-decoration: none;
+	transition: color $time, opacity $time, transform $time;
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: $color-link-hover;
+	}
+
+	svg {
+		transition: none;
+	}
+}
+
+hr {
+	background-color: $hr;
+	border: 0;
+	height: 1px;
+	margin: 1.25rem 0;
+}
+
+strong, b {
+	font-weight: 700;
+}
+
+dfn, cite, em, i {
+	font-style: italic;
+}
+
+blockquote {
+	font-weight: 700;
+	margin: 2.5em 1em;
+}
+
+address {
+	margin: rem(0 0 20);
+}
+
+pre {
+	max-width: 100%;
+	background: #eff1f2;
+	font-family: $font-pre;
+	font-size: 14px;
+	margin: rem(16 0);
+	padding: rem(16);
+	border-radius: $radius;
+	overflow: auto;
+}
+
+code, kbd, tt, var {
+	background: #eff1f2;
+	font-family: $font-code;
+	font-size: 14px;
+	padding: 3px 6px;
+	border-radius: 4px;
+}
+
+code var {
+	padding: 0;
+}
+
+kbd {
+	background-color: $b;
+	color: $w;
+	font-size: 14px;
+	border-radius: 4px;
+	padding: 3px 6px;
+}
+
+mark {
+	background-color: transparent;
+	font-weight: 500;
+}
+
+abbr, acronym {
+	border-bottom: 1px dotted;
+	cursor: help;
+}
+
+big {
+	font-size: 125%;
+}
+
+svg {
+	transition: all $time 0s;
+}
+
+// Make sure embeds and iframes fit their containers.
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+iframe[src*="youtube"],
+iframe[src*="vimeo"] {
+	@include max(lg) {
+		width: 100%;
+		height: calc((100vw - $grid-gutter-width * 2) * 0.5625); // 16:9
+	}
+}
+
+.bg {
+	background-repeat: no-repeat;
+	background-position: 50%;
+	background-size: cover;
+}
+
+.padding-top {
+	padding-top: 150px;
+
+	.breadcrumbs {
+		margin-bottom: 0;
+	}
+}
+
+
+.iframe_wrapper {
+	width: 100%;
+
+	div {
+		padding-bottom: 84%;
+		position: relative;
+
+		iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+}
+
+.preloader_container {
+	position: relative;
+
+	&:before {
+		content: "";
+		display: block;
+		width: rem(40);
+		height: rem(40);
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid'%3E%3Ccircle cx='50' cy='50' fill='none' stroke-linecap='round' r='40' stroke-width='5' stroke='%2301CCAD' stroke-dasharray='62.83185307179586 62.83185307179586' transform='rotate(299.873 50 50)'%3E%3CanimateTransform attributeName='transform' type='rotate' calcMode='linear' values='0 50 50;360 50 50' keyTimes='0;1' dur='1.5s' begin='0s' repeatCount='indefinite'/%3E%3C/circle%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+		background-size: contain;
+		position: absolute;
+		top: -32px;
+		left: 0;
+		right: 0;
+		z-index: 110;
+		margin: 0 auto;
+		opacity: 0;
+		visibility: hidden;
+		@include tr;
+	}
+	&.loading {
+		&:before {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+}
+
+.gap-10 {
+	gap: 10px;
+}

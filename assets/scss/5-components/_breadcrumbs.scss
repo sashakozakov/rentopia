@@ -1,0 +1,50 @@
+.breadcrumbs {
+	color: $b;
+	font-size: rem(14);
+	margin-bottom: rem(30);
+	font-style: normal;
+	font-weight: 600;
+
+	.container {
+
+		.container & {
+			padding: 0;
+		}
+	}
+
+	a {
+		margin-right: rem(2);
+		color: $grey;
+		font-weight: 500;
+
+		&:hover {
+			color: $primary;
+		}
+	}
+
+	span {
+		span {
+			span {
+				display: inline;
+				margin-left: rem(3);
+			}
+		}
+	}
+
+	.breadcrumb_last {
+		color: $color-text;
+	}
+
+	p {
+		margin: 0;
+	}
+
+	.separator {
+		display: inline-block;
+		margin: rem(0 5);
+
+		@include min(md) {
+			margin: rem(0 10);
+		}
+	}
+}

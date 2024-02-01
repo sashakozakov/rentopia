@@ -1,0 +1,342 @@
+.submit_application_section {
+	position: relative;
+	min-height: 100vh;
+	padding: 130px 0 70px;
+	@include min(md) {
+		padding: 184px 0 70px;
+	}
+
+	.svg {
+		position: absolute;
+		@include max(md) {
+			max-width: 58vw;
+			max-height: 50vw;
+		}
+	}
+
+	&_svg {
+		&_1 {
+			left: 0;
+			top: 25%;
+		}
+
+		&_2 {
+			right: 0;
+			top: 28%;
+		}
+
+		&_3 {
+			bottom: 0;
+			left: 0;
+		}
+	}
+
+	.container {
+		position: relative;
+	}
+
+	&--header {
+		margin-bottom: rem(55);
+	}
+
+	.applications_blocks {
+		max-width: rem(1314);
+		margin-top: rem(30);
+		@include min(md) {
+			margin-top: rem(81);
+		}
+	}
+
+
+	.application_block {
+		background: $light;
+		height: 100%;
+		text-align: center;
+		color: $grey;
+		border: 1px solid $b;
+		padding: 40px 15px 30px;
+		display: block;
+		@include min(md) {
+			padding: 79px 15px 47px;
+		}
+
+		&--inner {
+			margin: 0 auto;
+			max-width: 430px;
+		}
+
+		&--img {
+			margin-bottom: 25px;
+			@include min(md) {
+				margin-bottom: 50px;
+			}
+		}
+
+		&--title {
+			margin-bottom: 13px;
+			color: $black;
+		}
+
+		&--result {
+			margin: 0 auto;
+			max-width: rem(302);
+		}
+
+		table {
+			text-transform: uppercase;
+			font-weight: 500;
+			margin-bottom: rem(10);
+			@include min(md) {
+				margin-bottom: rem(40);
+			}
+
+			tbody {
+				td {
+					color: $grey;
+					border-bottom: 1px solid $grey;
+				}
+			}
+
+			tfoot {
+				td {
+					color: $b;
+				}
+			}
+
+			tr {
+				td, th {
+					text-align: right;
+					padding: 19px 0;
+					@include max(md) {
+						padding: 14px 0;
+						font-size: 14px;
+					}
+
+					&:first-child {
+						text-align: left;
+					}
+
+					&:last-child {
+						font-weight: bold;
+					}
+				}
+			}
+		}
+
+		.pay_btn {
+			width: 100%;
+			padding: rem(16 15);
+			@include min(md) {
+				padding: rem(22 15);
+			}
+		}
+
+	}
+}
+
+body .submit_application_section,
+.simpay-form-wrap {
+	.simpay-styled .simpay-form-title {
+		@extend .h4;
+		margin-bottom: 13px !important;
+		color: $b;
+		text-align: center !important;
+	}
+
+
+	& + br + i {
+		color: $grey;
+		font-size: rem(12);
+		font-style: italic;
+	}
+
+	form {
+		max-width: rem(420);
+		margin: 0 auto;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 20px;
+
+		input[type='text'],
+		input[type='tel'],
+		input[type='email'],
+		input[type='number'] {
+			text-align: left;
+			background: $light !important;
+			border: 1px solid $b !important;
+			border-radius: 0 !important;
+			font-weight: 500 !important;
+			padding: rem(0 24) !important;
+			height: rem(59) !important;
+			margin-bottom: rem(16) !important;
+			@include min(md) {
+				margin-bottom: rem(24) !important;
+			}
+
+			&::placeholder {
+				color: $grey !important;
+				left: 0 !important;
+			}
+		}
+
+		button, input[type="submit"] {
+			width: 100% !important;
+			background: $primary !important;
+			border: none !important;
+			box-shadow: none !important;
+			outline: none !important;
+			text-transform: uppercase !important;
+			color: $w !important;
+			text-align: center !important;
+			font-weight: 600 !important;
+			font-size: rem(16) !important;
+			padding: rem(17) !important;
+			border-radius: 0 !important;
+			margin-bottom: rem(40) !important;
+			cursor: pointer !important;
+			@include tr;
+
+			&:hover,
+			&:focus,
+			&:active {
+				background-color: $primary-hover !important;
+				border-color: $primary-hover !important;
+				color: $w !important;
+				box-shadow: none !important;
+				outline: none !important;
+			}
+		}
+
+		.acceptance {
+			font-size: rem(18);
+			display: block;
+			margin-bottom: rem(32);
+			cursor: pointer;
+
+			input {
+				display: none;
+
+				&:checked + span:before {
+					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26' width='26px' height='26px'%3E%3Cpath d='M 22.566406 4.730469 L 20.773438 3.511719 C 20.277344 3.175781 19.597656 3.304688 19.265625 3.796875 L 10.476563 16.757813 L 6.4375 12.71875 C 6.015625 12.296875 5.328125 12.296875 4.90625 12.71875 L 3.371094 14.253906 C 2.949219 14.675781 2.949219 15.363281 3.371094 15.789063 L 9.582031 22 C 9.929688 22.347656 10.476563 22.613281 10.96875 22.613281 C 11.460938 22.613281 11.957031 22.304688 12.277344 21.839844 L 22.855469 6.234375 C 23.191406 5.742188 23.0625 5.066406 22.566406 4.730469 Z'/%3E%3C/svg%3E");
+					background-repeat: no-repeat;
+					background-position: 50%;
+					background-size: rem(15);
+				}
+			}
+
+			span {
+				position: relative;
+				display: block;
+				padding-left: rem(24);
+				@include max(sm) {
+					font-size: rem(16);
+				}
+
+				&:before {
+					position: absolute;
+					content: '';
+					left: 0;
+					top: rem(7);
+					width: rem(16);
+					height: rem(16);
+					border: 1px solid $b;
+					@include max(sm) {
+						top: rem(5);
+					}
+				}
+			}
+		}
+
+		p {
+			color: $grey;
+			font-size: rem(12);
+			font-style: italic;
+		}
+
+		.simpay-form-control {
+			margin: 0;
+			width: 100%;
+			flex: 1 1 100% !important;
+
+			&:nth-of-type(3) {
+				max-width: 66%;
+			}
+
+			&:nth-of-type(4) {
+				flex: 1 1 !important;
+			}
+		}
+
+		.simpay-custom-amount-wrap {
+			position: relative;
+			display: block;
+
+			.simpay-currency-symbol-left {
+				position: absolute;
+				transform: translateY(-50%);
+				padding: 0;
+				font-weight: 500;
+				top: calc(50% - 6px);
+				left: 10px;
+				@include min(md) {
+					top: calc(50% - 12px);
+				}
+				//top: 50%;
+				background: transparent;
+				border: none !important;
+				box-shadow: none !important;
+
+				input[type="tel"] {
+					padding-left: rem(25) !important;
+				}
+			}
+		}
+	}
+
+	.simpay-amounts-container {
+		text-transform: uppercase;
+		font-weight: 500;
+		margin-bottom: rem(10);
+		@include min(md) {
+			margin-bottom: rem(40);
+		}
+
+		& > div {
+			color: $grey;
+			border-bottom: 1px solid $grey;
+
+			p {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				padding: 19px 0;
+				color: inherit;
+				font-weight: inherit;
+				font-size: inherit;
+				font-style: inherit;
+				@include max(md) {
+					padding: 14px 0;
+					font-size: 14px;
+				}
+
+				& > span {
+					&:last-child {
+						font-weight: bold;
+					}
+				}
+			}
+
+			&:last-child {
+				color: $b;
+			}
+		}
+	}
+}
+
+.submit_application_section {
+	form {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 15px;
+	}
+}

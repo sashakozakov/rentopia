@@ -1,0 +1,183 @@
+// Header menu
+.main-nav {
+	@include max(lg) {
+		width: 100%;
+		height: calc(var(--vh, 1vh) * 100); // tweak for mobiles
+		background-color: $w;
+		color: $b;
+		overflow-y: auto;
+		position: fixed;
+		top: 0;
+		right: 0;
+		transition: opacity 0.1s;
+		opacity: 0;
+		visibility: hidden;
+		z-index: -1;
+		padding: 60px 40px 40px;
+		display: flex;
+		flex-direction: column;
+	}
+
+	@include min(lg) {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		flex: 1 1;
+		gap: rem(20); //48
+	}
+
+	.is-menu-open & {
+		opacity: 1;
+		visibility: visible;
+		transition: opacity $time;
+		z-index: 2;
+	}
+}
+
+.main-menu {
+	@include unstyled-list;
+	display: flex;
+	flex-direction: column;
+	gap: rem(4);
+
+	@include min(lg) {
+		flex-direction: row;
+		align-items: center;
+		gap: rem(20);
+		justify-content: flex-end;
+	}
+	@include min(xl) {
+	    gap: rem(34);
+	}
+
+	&__container {
+		//@extend .container;
+
+		@include min(lg) {
+			max-width: unset;
+			padding-right: 0;
+			padding-left: 0;
+			flex: 1 1;
+			margin-right: rem(-21);
+		}
+	}
+
+	li {
+		a {
+			letter-spacing: .2px;
+			font-weight: 500;
+		}
+
+		.dropdown-toggle {
+			background: transparent;
+			border: none;
+			padding: rem(0 10);
+		}
+	}
+
+	> li {
+		flex-shrink: 0;
+		display: block;
+		position: relative;
+		padding-bottom: 9px;
+		//border-bottom: 1px solid $b;
+
+		&:not(:first-child) {
+			border-top: 1px solid $b;
+			padding-top: 21px;
+			@include min(lg) {
+				border: none;
+				padding-top: 0;
+			}
+		}
+
+		@include min(lg) {
+			border-top: none;
+			padding-bottom: 0;
+			border-bottom: none;
+			display: flex;
+			align-items: center;
+			//height: var(--header-scrolled-height);
+		}
+
+		&.menu-item-has-children {
+			padding-right: rem(24);
+			position: relative;
+
+			@include min(lg) {
+				padding-right: 0;
+			}
+
+			@include hover {
+				.sub-menu {
+					transform: translateY(0);
+					opacity: 1;
+					visibility: visible;
+				}
+			}
+
+			&.active {
+			}
+		}
+
+		> a {
+			color: $color-text;
+			display: block;
+
+			@include max(lg) {
+				font-size: rem(18);
+			}
+			@include min(lg) {
+				display: inline-block;
+			}
+
+			@include hover {
+				color: $primary !important;
+			}
+		}
+	}
+
+	.sub-menu {
+		@include unstyled-list;
+		width: 100%;
+		padding-top: rem(10);
+		//display: none;
+
+		@include min(lg) {
+			display: block;
+			width: rem(200);
+			background-color: $primary;
+			padding-bottom: rem(10);
+			position: absolute;
+			top: 100%;
+			left: 0;
+			transform: translateY(rem(10));
+			opacity: 0;
+			visibility: hidden;
+			transition: all $time;
+		}
+
+		li {
+			width: 100%;
+			margin-bottom: rem(12);
+			@include min(lg) {
+				padding: rem(5 10 5 15);
+				margin-bottom: 0;
+			}
+
+			a {
+				color: $color-text;
+				transition: text-shadow $time;
+
+				@include min(lg) {
+					color: $w;
+				}
+
+				@include hover {
+					color: $w;
+					text-shadow: -0.025em 0 0.025em $w, 0.025em 0 0.025em $w;
+				}
+			}
+		}
+	}
+}

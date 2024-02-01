@@ -1,0 +1,213 @@
+.btn {
+	@include tr;
+	text-transform: uppercase;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: rem(12);
+	background-color: $primary;
+	color: $w;
+	border-radius: 0;
+	line-height: 1;
+	border: 1px solid $primary;
+	padding: rem(16 51);
+	height: auto;
+	font-weight: 600;
+	font-size: rem(14);
+	letter-spacing: .5px;
+	text-align: center;
+	cursor: pointer;
+
+	&:hover,
+	&:focus,
+	&:active {
+		background-color: $primary-hover;
+		border-color: $primary-hover;
+		color: $w;
+		box-shadow: none;
+		outline: none;
+	}
+
+	> svg {
+		flex-shrink: 0;
+		width: rem(20);
+		height: rem(20);
+		transition: none;
+	}
+
+	&-md {
+		padding-left: rem(30);
+		padding-right: rem(30);
+		letter-spacing: .8px;
+	}
+
+}
+
+.btn-outline {
+	background-color: transparent;
+	//border-color: $primary;
+	color: $primary;
+
+	> svg {
+		fill: $primary;
+		stroke: $primary;
+		@include tr();
+	}
+
+	&:hover {
+		background-color: $primary;
+		border-color: $primary;
+		color: $w;
+
+		svg {
+			fill: $w;
+			stroke: $w;
+		}
+	}
+}
+
+.btn-md {
+	padding: 16px 30px;
+}
+
+.show_more {
+	padding-right: rem(56);
+	background-image: url("data:image/svg+xml,%3Csvg width='50' height='10' viewBox='0 0 50 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M49.1666 5.69428C49.4129 5.44802 49.4129 5.04876 49.1666 4.80251L45.1536 0.789542C44.9074 0.543286 44.5081 0.543286 44.2619 0.789542C44.0156 1.0358 44.0156 1.43506 44.2619 1.68131L47.829 5.24839L44.2619 8.81548C44.0156 9.06173 44.0156 9.46099 44.2619 9.70725C44.5081 9.9535 44.9074 9.9535 45.1536 9.70725L49.1666 5.69428ZM0.796875 5.87897L48.7207 5.87897L48.7207 4.61782L0.796875 4.61781L0.796875 5.87897Z' fill='%2301CCAD'/%3E%3C/svg%3E%0A");
+	text-transform: uppercase;
+	color: $primary;
+	font-size: rem(14);
+	font-weight: 600;
+	letter-spacing: .75px;
+	@include tr();
+
+	&:hover {
+		background-image: url("data:image/svg+xml,%3Csvg width='50' height='10' viewBox='0 0 50 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M49.1666 5.69428C49.4129 5.44802 49.4129 5.04876 49.1666 4.80251L45.1536 0.789542C44.9074 0.543286 44.5081 0.543286 44.2619 0.789542C44.0156 1.0358 44.0156 1.43506 44.2619 1.68131L47.829 5.24839L44.2619 8.81548C44.0156 9.06173 44.0156 9.46099 44.2619 9.70725C44.5081 9.9535 44.9074 9.9535 45.1536 9.70725L49.1666 5.69428ZM0.796875 5.87897L48.7207 5.87897L48.7207 4.61782L0.796875 4.61781L0.796875 5.87897Z' fill='%23019982'/%3E%3C/svg%3E%0A");
+	}
+
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+}
+
+.wishlist_link {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	font-weight: 500;
+	color: $b;
+
+	svg {
+		width: 24px;
+		height: auto;
+	}
+}
+
+// Label styled as button
+.btn-label {
+	display: inline-flex;
+	justify-content: center;
+	background-color: $primary;
+	color: $w;
+	font-size: rem(14);
+	line-height: rem(14);
+	padding: rem(5 10);
+	border-radius: $radius;
+
+	&-secondary {
+		background-color: $secondary;
+	}
+}
+
+input[type="submit"]:not(.draft) {
+	@extend .btn;
+}
+input[type="submit"].draft {
+	color: $primary;
+	background: transparent;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+
+// Button Group
+.btn-group {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: rem(20);
+	flex-direction: column;
+	@include min(480) {
+		flex-direction: row;
+	}
+}
+
+
+.share-btn {
+	position: relative;
+
+	.share_group {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: rem(10);
+		position: absolute;
+		top: calc(100% + 10px);
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+		border: 1px solid $primary;
+		background: $primary;
+		padding: 10px;
+		opacity: 0;
+		visibility: hidden;
+		@include tr;
+
+		&:before {
+			position: absolute;
+			content: '';
+			bottom: 100%;
+			height: 10px;
+			left: 0;
+			right: 0;
+		}
+
+		&:after {
+			position: absolute;
+			content: '';
+			bottom: 100%;
+			left: 0;
+			right: 0;
+			width: 0;
+			height: 0;
+			border-style: solid;
+			border-width: 0 10px 10px 10px;
+			border-color: transparent transparent $primary transparent;
+			margin: 0 auto;
+		}
+
+		a {
+			@include tr;
+
+			svg {
+				fill: $w;
+				stroke: $w;
+				height: 32px;
+				width: auto;
+
+				&.facebook_icon {
+					height: 24px;
+				}
+			}
+
+			&:hover {
+				transform: scale(1.2);
+			}
+		}
+	}
+
+	&:hover {
+		.share_group {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+}

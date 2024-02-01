@@ -1,0 +1,67 @@
+body {
+	&.tax-neighborhood,
+	&.tax-collections,
+	&.tax-apartment_tag,
+	&.archive.category,
+	&.post-type-archive-building,
+	&.blog {
+		padding-top: 133px;
+	}
+}
+
+.blog {
+	.archive-wrapper {
+		margin-bottom: clamp-rem(20, 62, 575, 1200);
+	}
+
+	&_categories {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		list-style: none;
+		padding: 0;
+		margin: rem(0 0 55);
+		gap: rem(15 18);
+		@include min(md) {
+			gap: rem(20 40);
+		}
+		@include min(xl) {
+			gap: rem(20 73);
+		}
+
+		a {
+			color: $grey;
+			position: relative;
+
+			&:before {
+				position: absolute;
+				content: '';
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+				top: 100%;
+				width: 0;
+				height: 1px;
+				background: $primary;
+				@include tr();
+			}
+
+			&:hover {
+				&:before {
+					width: rem(12);
+				}
+			}
+		}
+
+		.current-cat {
+			a {
+				font-weight: 600;
+				color: $b;
+
+				&:before {
+					width: rem(12);
+				}
+			}
+		}
+	}
+}

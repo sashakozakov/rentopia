@@ -1,0 +1,158 @@
+.module_collections {
+	position: relative;
+
+	.svg {
+		&_3 {
+			position: absolute;
+			left: 0;
+			top: 0;
+			transform: translate(-26%, 9%);
+			width: 350px;
+			@include min(xl) {
+				transform: translate(-26%, -11%);
+				top: auto;
+				bottom: 0;
+				width: auto;
+				height: auto;
+			}
+		}
+
+		&_4 {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			transform: translate(32%, -34%);
+			height: auto;
+			width: 350px;
+			@include min(lg) {
+				transform: translate(52%, -4%);
+			}
+			@include min(xl) {
+				width: auto;
+			}
+		}
+	}
+
+	&--container {
+		position: relative;
+		row-gap: rem(9);
+		@include min(md) {
+			row-gap: rem(52);
+		}
+	}
+
+	&__grid {
+		width: 100%;
+		@include min(lg) {
+			overflow: visible;
+
+			.swiper-wrapper {
+				row-gap: rem(30);
+				justify-content: center;
+				padding: 0 10px;
+				flex-wrap: wrap;
+
+				.swiper-slide {
+					width: calc(100% / 3);
+					padding: rem(0 15);
+					height: auto;
+				}
+			}
+		}
+
+		.swiper-pagination {
+			margin-top: 0;
+			position: static;
+		}
+
+		.swiper-notification {
+			display: none;
+		}
+
+		&--item {
+
+			@include min(lg) {
+				&:nth-child(even) {
+					.inner_block {
+						padding-top: 89px;
+						padding-bottom: 0;
+					}
+
+					.caption {
+						top: 0;
+						bottom: auto;
+					}
+				}
+			}
+
+			.inner_block {
+				position: relative;
+				height: 100%;
+				@include min(sm) {
+					padding-bottom: rem(89);
+				}
+
+				&--img {
+					position: relative;
+					padding-bottom: 91.5%;
+					@include min(sm) {
+						padding-bottom: 127%;
+					}
+
+					img {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						object-position: center;
+					}
+				}
+
+				> img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+
+			.caption {
+				background: $light;
+				backdrop-filter: blur(rem(24));
+				border: 1px solid $b;
+				padding: rem(15 15 0);
+				@include min(sm) {
+					padding: rem(15 15 7);
+					background: rgba($light, .7);
+					position: absolute;
+					left: rem(15);
+					right: rem(15);
+					bottom: 0;
+				}
+				@include min(xl) {
+					max-width: rem(315);
+					left: rem(25);
+					right: rem(25);
+					padding: 37px 34px 7px;
+				}
+
+				&__icon {
+					margin-bottom: rem(22);
+					@include max(sm) {
+						img {
+							max-width: rem(35);
+						}
+					}
+				}
+
+				h4 {
+					margin-bottom: 0;
+					@include min(sm) {
+						margin-bottom: rem(14);
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,387 @@
+.header {
+	width: 100%;
+	//height: var(--header-height);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	transition: background-color $time, height $time;
+	padding: rem(31 0);
+	@include tr();
+
+	.has-hero:not(.is-scrolled) & {
+		background-color: transparent;
+	}
+
+	.is-scrolled & {
+		//height: var(--header-scrolled-height);
+		padding: rem(10 0);
+		box-shadow: 0 10px 10px rgba($b, 0.1);
+		background: $w;
+	}
+
+	> .container {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: rem(30);
+		max-width: rem(1600);
+	}
+
+	&__logo {
+		margin-right: auto;
+		z-index: 3;
+		flex-shrink: 0;
+		display: block;
+		line-height: 0;
+		transition: opacity $time;
+		width: 100%;
+		max-width: rem(30);
+		@include min(sm) {
+			max-width: rem(44);
+		}
+		@include max(lg) {
+			.is-menu-open & {
+				opacity: 0;
+				visibility: hidden;
+			}
+		}
+
+		img {
+			width: 100%;
+		}
+	}
+
+	&__search {
+		position: relative;
+		border: none;
+		border-radius: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		align-items: center;
+
+		input {
+			border-radius: 0;
+			border: none;
+			border-bottom: 1px solid $color-text;
+			flex: 1 1;
+			padding: 0;
+			max-width: rem(170);
+			background: transparent;
+		}
+
+		&--submit {
+			background: transparent;
+			border: none;
+			cursor: pointer;
+		}
+	}
+
+	.btn {
+		padding-left: 15px;
+		padding-right: 15px;
+		text-align: center;
+		@include min(xl) {
+			min-width: rem(150);
+		}
+	}
+}
+
+
+// Mobile menu toggle
+.icon-burger {
+	flex-shrink: 0;
+	display: inline-block;
+	width: rem(30);
+	height: rem(20);
+	cursor: pointer;
+	position: relative;
+	z-index: 110;
+	right: 10px;
+
+	.is-menu-open & {
+		i {
+			background-color: transparent;
+
+			&:before {
+				transform: rotate(-45deg) translateY(rem(-4));
+			}
+
+			&:after {
+				transform: rotate(45deg) translateY(rem(4));
+			}
+		}
+	}
+
+	i {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background-color: $b;
+		position: absolute;
+		top: calc(50% - 1px);
+		left: 0;
+		transition: transform $time;
+
+		&:before,
+		&:after {
+			@include tr;
+			content: '';
+			display: block;
+			width: 100%;
+			height: 2px;
+			background-color: $b;
+			transform-origin: right center;
+			position: absolute;
+			right: 0;
+		}
+
+		&:before {
+			top: rem(-8);
+		}
+
+		&:after {
+			top: rem(8);
+		}
+	}
+}
+
+.admin_header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: $w;
+	border-bottom: 1px solid $hr;
+	padding: 21px 0;
+	z-index: 9;
+
+	> .container {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		max-width: 1554px;
+
+		> div {
+			flex: 1 1;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+			align-items: center;
+		}
+	}
+
+	&--logo {
+		display: inline-block;
+	}
+
+	.icon-burger,
+	.icon-burger {
+		i {
+			&:before,
+			&:after {
+				.is-menu-open & {
+					background: $w;
+				}
+			}
+		}
+	}
+
+	.admin_menu__container {
+		//display: none;
+		@include min(lg) {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: flex-end;
+			gap: 10px 42px;
+		}
+		@include max(lg) {
+			position: fixed;
+			top: 0;
+			background: $b;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			z-index: 100;
+			padding: rem(190 40 100);
+			//display: flex;
+			//flex-direction: column-reverse;
+			//justify-content: flex-end;
+			//gap: 50px;
+			transform: scale(.7);
+			opacity: 0;
+			visibility: hidden;
+			@include tr;
+			.is-menu-open & {
+				opacity: 1;
+				visibility: visible;
+				transform: scale(1);
+			}
+			.logout_btn {
+				position: absolute;
+				bottom: rem(40);
+				left: rem(40);
+				right: rem(40);
+				//background: $primary;
+				//color: $w;
+				text-align: center;
+			}
+		}
+	}
+
+	.admin_menu {
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		border-top: 1px solid rgba($w, .5);
+		@include min(lg) {
+			border: none;
+			gap: 10px 42px;
+			align-items: center;
+			flex-direction: row;
+		}
+
+		& + .admin_menu {
+			border-top: none;
+		}
+
+		li {
+			list-style: none;
+			border-bottom: 1px solid rgba($w, .5);
+			@include min(lg) {
+				border: none;
+			}
+
+			a {
+				color: $w;
+				font-size: rem(18);
+				padding: 18px 0;
+				display: block;
+				@include min(lg) {
+					display: inline-block;
+					padding: 0;
+					color: $b;
+					font-size: unset;
+
+					&:hover {
+						color: $primary;
+					}
+				}
+			}
+		}
+	}
+
+	.user_block {
+		position: relative;
+		@include max(lg) {
+			position: absolute;
+			top: rem(83);
+			left: rem(40);
+			right: rem(40);
+		}
+
+		&--img {
+			border-radius: 50%;
+			background: $primary;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			width: rem(56);
+			height: rem(56);
+			color: $w;
+			text-transform: uppercase;
+			overflow: hidden;
+			@include min(lg) {
+				width: rem(38);
+				height: rem(38);
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center;
+			}
+		}
+
+		span {
+			@include max(lg) {
+				color: $w;
+				font-size: rem(18);
+			}
+		}
+
+		&__inner {
+			white-space: nowrap;
+			font-weight: 500;
+			cursor: pointer;
+			gap: rem(16);
+			@include min(lg) {
+				gap: rem(10);
+			}
+		}
+
+		&__full {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: rem(176);
+			padding: 22px 15px 22px 24px;
+			background: $color-text;
+			border-radius: 16px;
+			opacity: 0;
+			visibility: hidden;
+			@include tr;
+
+			.user_block--img {
+				width: rem(100);
+				height: rem(100);
+				margin: 0 auto rem(24);
+				font-size: rem(36);
+			}
+
+			span {
+				color: $w;
+				display: block;
+				font-size: rem(18);
+				text-align: center;
+				margin-bottom: rem(16);
+				font-weight: 500;
+			}
+
+			ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
+				gap: 8px;
+
+				a {
+					color: $w;
+
+					&:hover {
+						color: $primary;
+					}
+				}
+			}
+		}
+
+		&:hover {
+			@include min(lg) {
+				.user_block__full {
+					opacity: 1;
+					visibility: visible;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,256 @@
+.footer {
+	flex-shrink: 0;
+	padding-bottom: rem(42);
+	width: 100%;
+
+	&__top {
+		background: $light;
+		border: 1px solid $b;
+		display: flex;
+		flex-wrap: wrap;
+		gap: rem(5 30);
+		line-height: 1.5;
+		padding: rem(30 15 15);
+		flex-direction: column;
+		@include min(sm) {
+			gap: rem(10 30);
+			flex-direction: row;
+		}
+		@include min(lg) {
+			gap: rem(30);
+			padding: 0;
+		}
+
+		a {
+			color: $b;
+
+			&:hover {
+				color: $primary;
+			}
+		}
+
+		&--logo {
+			padding: rem(0 5 28 27);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			@include min(sm) {
+				padding: rem(0 5 0 27);
+				width: 100%;
+			}
+			@include min(lg) {
+				width: 16%;
+			}
+			@include min(xl) {
+				width: 21.3%;
+			}
+		}
+
+		&--sidebar {
+			text-align: center;
+			@include min(sm) {
+				text-align: left;
+				padding: rem(35 0 16);
+			}
+
+			&.sidebar_1 {
+				flex: 1 1;
+			}
+
+			.widget_text {
+				color: $b;
+			}
+
+			&.sidebar_2 {
+				@include min(sm) {
+					width: 24%;
+				}
+				@include min(lg) {
+					width: 15%;
+				}
+				@include min(xl) {
+					width: 10%;
+				}
+			}
+
+			&.sidebar_3 {
+				@include min(sm) {
+					width: 24%;
+				}
+				@include min(lg) {
+					width: 10%;
+				}
+				@include min(xl) {
+					width: 7%;
+				}
+			}
+
+			.menu {
+				@include list-unstyled;
+			}
+		}
+
+		.textwidget {
+			@include max(sm) {
+				font-size: rem(14);
+				line-height: 1.6;
+			}
+		}
+
+		.socials {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			justify-content: center;
+			gap: rem(10);
+			@include max(sm) {
+				border-top: 1px solid $b;
+				padding: rem(14 0 10);
+				gap: rem(15 40);
+				margin-top: rem(8);
+			}
+			@include min(lg) {
+				width: auto;
+				gap: 0;
+			}
+
+			&__item {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				color: $w;
+				height: 100%;
+				@include min(lg) {
+					border-left: 1px solid $b;
+					width: rem(90);
+				}
+				@include min(xl) {
+					width: rem(130);
+				}
+
+				svg {
+					width: rem(34);
+					height: rem(34);
+					fill: $b;
+					@include tr();
+					@include min(lg) {
+						width: rem(48);
+						height: rem(48);
+					}
+
+					&.icon-facebook {
+						width: rem(16);
+						@include min(lg) {
+							width: rem(22);
+						}
+					}
+				}
+
+				&:hover {
+					color: $primary;
+
+					svg {
+						transform: scale(1.2);
+					}
+				}
+			}
+		}
+	}
+
+	&__copyright {
+		font-weight: 600;
+		color: $grey;
+		margin-top: rem(14);
+
+		p {
+			letter-spacing: 1.1px;
+			display: inline;
+
+			a {
+				color: inherit;
+
+				&:hover {
+					color: $primary;
+				}
+			}
+		}
+	}
+}
+
+.footer-links {
+	@include unstyled-list;
+	display: flex;
+	flex-direction: column;
+	gap: rem(16);
+	text-align: center;
+
+	@include min(lg) {
+		flex-direction: row;
+		gap: rem(30);
+	}
+
+	li {
+		line-height: 1;
+	}
+
+	a {
+		color: $w;
+
+		&:hover {
+			color: $primary;
+		}
+	}
+}
+
+
+.admin-footer {
+	background: $b;
+	line-height: 1;
+	width: 100%;
+	color: $w;
+	padding: rem(15 0);
+	@include min(md) {
+		padding: rem(11 0);
+	}
+
+	.container {
+		max-width: 1554px;
+	}
+
+	.row {
+		@include max(md) {
+			row-gap: rem(20);
+			> div {
+				&:nth-child(1) {
+					order: 1;
+				}
+
+				&:nth-child(3) {
+					order: 2;
+				}
+
+				&:nth-child(2) {
+					order: 3;
+				}
+			}
+		}
+	}
+
+	p {
+		margin: 0;
+		font-size: rem(12);
+		font-weight: 500;
+	}
+
+	a {
+		text-decoration: underline;
+		color: $w;
+		text-transform: uppercase;
+		font-size: rem(12);
+		font-weight: bold;
+
+		&:hover {
+			color: $primary;
+		}
+	}
+}

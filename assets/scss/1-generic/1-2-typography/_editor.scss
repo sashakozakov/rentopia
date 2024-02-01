@@ -1,0 +1,74 @@
+// Custom Style Formats:
+.text-sm {
+	font-size: rem(12);
+}
+
+.text-default {
+	font-size: rem(16);
+}
+
+.text-md {
+	font-size: clamp-rem(16, 18, 575, 1200);
+}
+
+.text-lg {
+	font-size: clamp-rem(16, 22, 575, 1200);
+}
+
+.text-xl {
+	font-size: clamp-rem(16, 24, 575, 1200);
+
+	@include min(lg) {
+		p, li {
+			letter-spacing: 1.1px;
+		}
+	}
+}
+
+// simple link (e.g. inside post/page content)
+%link {
+	color: $primary;
+	text-decoration: none;
+
+	@include hover {
+		color: $primary;
+		text-decoration: underline;
+	}
+}
+
+.blockquote {
+	font-size: rem(20);
+	margin: rem(50 30);
+
+	p {
+		font-weight: 700;
+	}
+
+	cite {
+		display: block;
+		color: $w;
+		font-weight: 400;
+		font-style: normal;
+		margin-top: rem(16);
+		margin-bottom: 0;
+	}
+}
+
+// Styles for formatted text (e.g. post/page content, WYSIWYG custom fields)
+.editor {
+	> *:last-child {
+		margin-bottom: 0;
+	}
+
+	@include headings {
+		margin-top: rem(20);
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	a:not([class]) {
+		@extend %link;
+	}
+}

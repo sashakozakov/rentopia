@@ -1,0 +1,61 @@
+// Fluid-responsive font-size calculator
+// @link https://websemantics.uk/tools/responsive-font-calculator/
+// clamp browser width: from 575px to 1440px
+
+@include headings {
+	min-height: 0vw; // safari fix
+	font-family: $font-heading;
+	font-weight: 700;
+	line-height: 1.35;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+	letter-spacing: rem(.8);
+
+	a {
+		color: inherit;
+	}
+}
+
+h1,
+.h1 {
+	font-size: clamp-rem(30, 64, 640, 991);
+}
+
+h2,
+.h2 {
+	font-size: clamp-rem(28, 48, 640, 991);
+	line-height: 1.2;
+}
+
+h3,
+.h3 {
+	font-size: clamp-rem(24, 42, 991, 1400);
+}
+
+h4,
+.h4 {
+	font-size: clamp-rem(20, 32, 767, 1400);
+}
+
+h5,
+.h5 {
+	font-size: clamp-rem(18, 24, 640, 991);
+}
+
+h6,
+.h6 {
+	font-size: clamp-rem(16, 18, 640, 991);
+	//font-size: rem(16);
+}
+
+.subtitle {
+	font-size: rem(16);
+	display: block;
+	text-transform: uppercase;
+	font-weight: 500;
+	color: $grey;
+
+	&.small {
+		font-size: rem(12);
+	}
+}

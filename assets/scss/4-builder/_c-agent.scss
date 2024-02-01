@@ -1,0 +1,134 @@
+.agent_block {
+	background: $light;
+	border: 1px solid $b;
+
+	&.small_block {
+		padding: 15px;
+		@include min(lg) {
+			padding: 46px 61px 40px 31px;
+		}
+
+		.socials {
+			gap: rem(20);
+			@include min(lg) {
+				gap: rem(30);
+			}
+		}
+	}
+
+	&.big_block {
+		position: relative;
+		padding: 15px;
+		@include min(sm) {
+			padding: 50px 20px;
+		}
+		@include min(md) {
+			padding: 89px 33px 74px;
+		}
+
+		.socials {
+			gap: rem(47);
+			@include min(md) {
+				flex-direction: column;
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				right: 5%;
+			}
+			@include max(md) {
+				margin-bottom: 30px;
+				justify-content: center;
+				width: 100%;
+			}
+
+			svg {
+				height: auto;
+				display: block;
+				width: rem(30);
+				@include min(sm) {
+					width: rem(40);
+				}
+			}
+		}
+
+		@include min(lg) {
+			p {
+				line-height: 1.8;
+			}
+		}
+
+		.btn {
+			@include min(lg) {
+				margin-top: 28px;
+			}
+			@include max(md) {
+				width: 100%;
+			}
+		}
+	}
+
+	&__img {
+		margin: 0 auto 10px;
+
+		.big_block & {
+			margin-bottom: 20px;
+		}
+
+		> div {
+			border-radius: 50%;
+			overflow: hidden;
+			position: relative;
+			padding-bottom: 100%;
+
+			img,
+			.img-placeholder {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 100%;
+				object-fit: cover;
+				border-radius: 50%;
+				overflow: hidden;
+			}
+		}
+
+		.small_block & {
+			max-width: 128px;
+		}
+
+		.big_block & {
+			max-width: 140px;
+			@include min(lg) {
+				max-width: 170px;
+			}
+		}
+	}
+
+	h5 {
+		margin-bottom: 13px;
+	}
+
+	.socials {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.btn {
+		padding-left: 10px;
+		padding-right: 10px;
+		@include min(lg) {
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+	}
+
+	&--name {
+		font-weight: 500;
+		margin: rem(0 0 3);
+
+		.big_block & {
+			font-size: clamp-rem(18, 24, 640, 991);
+		}
+	}
+}

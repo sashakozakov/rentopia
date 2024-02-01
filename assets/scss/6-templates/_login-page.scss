@@ -1,0 +1,201 @@
+.login {
+	form {
+		margin-top: 0;
+
+		&.header__search {
+			padding: 0;
+			border: none;
+			background: transparent;
+
+			input[type=text] {
+				background: transparent;
+			}
+		}
+	}
+
+	h1 {
+		@include max(md) {
+			margin-bottom: rem(31);
+		}
+
+		a {
+			width: rem(180);
+			height: rem(33);
+			background-image: url('../img/logo.svg'); // client's logo
+			background-size: contain;
+			@include min(md) {
+				margin-bottom: rem(15);
+				width: rem(260);
+				height: rem(47);
+			}
+		}
+	}
+
+
+	.login-layout {
+		position: relative;
+		@include min(md) {
+			min-height: calc(100vh - 90px);
+			background-position: 50%;
+			background-size: cover;
+			background-repeat: no-repeat;
+			padding: rem(130 30);
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: center;
+		}
+		@include max(md) {
+			background: $w !important;
+		}
+
+		> svg {
+			position: absolute;
+			bottom: -1px;
+			left: -1px;
+			right: -1px;
+			width: calc(100% + 2px);
+			height: auto;
+		}
+
+		&--img {
+			min-height: rem(377);
+			display: flex;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center;
+			}
+		}
+
+		.login-box {
+			background: $w;
+			width: 100%;
+			padding: rem(39 15);
+			@include min(md) {
+				padding: rem(48 15);
+				display: inline-block;
+				border: 1px solid $b;
+				max-width: rem(501);
+			}
+
+			#login {
+				max-width: rem(392);
+				width: 100%;
+				@include max(md) {
+					padding-top: 0;
+				}
+
+				h1 {
+					margin-bottom: 50px;
+				}
+
+				.login_text {
+					margin: 0 auto 25px;
+					max-width: 290px;
+				}
+			}
+
+			#login_error {
+				position: relative;
+				border: none;
+				padding: 0 0 0 30px;
+				font-size: 12px;
+				font-weight: 500;
+				color: $red;
+				box-shadow: none;
+				background-image: url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_270_3154)'%3E%3Cpath d='M4.58196 17.4165H17.4153C17.7144 17.4144 18.0085 17.3391 18.2718 17.1973C18.5352 17.0554 18.7598 16.8513 18.9262 16.6027C19.0925 16.3541 19.1955 16.0686 19.2261 15.771C19.2568 15.4735 19.2141 15.1729 19.102 14.8956L12.5936 3.66648C12.4351 3.37993 12.2027 3.14107 11.9206 2.97475C11.6385 2.80842 11.3169 2.7207 10.9895 2.7207C10.662 2.7207 10.3405 2.80842 10.0584 2.97475C9.77625 3.14107 9.54384 3.37993 9.38529 3.66648L2.87696 14.8956C2.76691 15.1666 2.72327 15.4599 2.74968 15.7512C2.7761 16.0424 2.8718 16.3231 3.02881 16.5698C3.18581 16.8166 3.39956 17.0222 3.65221 17.1694C3.90486 17.3167 4.18907 17.4014 4.48113 17.4165' fill='%23FB4E63'/%3E%3Cpath d='M4.58196 17.4165H17.4153C17.7144 17.4144 18.0085 17.3391 18.2718 17.1973C18.5352 17.0554 18.7598 16.8513 18.9262 16.6027C19.0925 16.3541 19.1955 16.0686 19.2261 15.771C19.2568 15.4735 19.2141 15.1729 19.102 14.8956L12.5936 3.66648C12.4351 3.37993 12.2027 3.14107 11.9206 2.97475C11.6385 2.80842 11.3169 2.7207 10.9895 2.7207C10.662 2.7207 10.3405 2.80842 10.0584 2.97475C9.77625 3.14107 9.54384 3.37993 9.38529 3.66648L2.87696 14.8956C2.76691 15.1666 2.72327 15.4599 2.74968 15.7512C2.7761 16.0424 2.8718 16.3231 3.02881 16.5698C3.18581 16.8166 3.39956 17.0222 3.65221 17.1694C3.90486 17.3167 4.18907 17.4014 4.48113 17.4165' stroke='%23FB4E63' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11 8.25V11.6548M11 13.75V13.7592' stroke='%23E5E7ED' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_270_3154'%3E%3Crect width='22' height='22' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+				background-repeat: no-repeat;
+				background-position: 0 50%;
+			}
+
+			.message {
+				border-color: $primary;
+			}
+
+			form {
+				border: none;
+				padding: 0;
+
+				label {
+					display: none;
+				}
+
+				input[type=password],
+				input[type=text] {
+					height: rem(46);
+					border-radius: 4px;
+					border-color: $hr;
+					font-size: rem(18);
+					font-family: $font-text;
+					padding: rem(0 22);
+					margin-bottom: rem(16);
+
+					&:focus {
+						border-color: $hr;
+						box-shadow: none;
+						outline: none;
+					}
+				}
+
+				.button.wp-hide-pw {
+					height: rem(46);
+					outline: none;
+					box-shadow: none;
+					border: none;
+
+					.dashicons {
+						color: $primary;
+					}
+				}
+
+				p.submit {
+					text-align: center;
+
+					.button-primary {
+						@extend .btn;
+						float: none;
+						@include min(lg) {
+							padding-left: 65px;
+							padding-right: 65px;
+						}
+						@include max(md) {
+							width: 100%;
+						}
+					}
+				}
+			}
+
+			#nav {
+				text-align: center;
+
+				a {
+					box-shadow: none;
+					outline: none;
+
+					&:hover {
+						color: $primary;
+					}
+				}
+			}
+
+			.language-switcher,
+			#backtoblog,
+			.privacy-policy-page-link {
+				display: none;
+			}
+		}
+
+	}
+
+	.footer {
+		position: relative;
+		z-index: 1;
+		@include min(md) {
+			margin-top: -130px;
+		}
+	}
+
+}

@@ -1,0 +1,12 @@
+.content_module {
+	margin-top: clamp-rem(40, 130, 575, 1200);
+	margin-bottom: 46px;
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		line-height: 1.3;
+	}
+}

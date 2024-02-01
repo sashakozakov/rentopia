@@ -1,0 +1,148 @@
+.module_hiring {
+	position: relative;
+
+	.svg {
+		@include max(md) {
+			height: auto;
+			max-width: rem(200);
+		}
+
+		&_7 {
+			position: absolute;
+			right: 0;
+			top: rem(-64);
+		}
+
+		&_8 {
+			position: absolute;
+			left: 0;
+			top: rem(267);
+		}
+	}
+
+	> .d-flex {
+		gap: rem(20);
+		@include min(md) {
+			gap: rem(46);
+		}
+	}
+
+	&__content {
+		color: $grey;
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			margin-bottom: rem(3);
+			color: $b;
+		}
+	}
+
+	.hiring_blocks {
+		position: relative;
+		@include max(md) {
+			gap: rem(35);
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+		}
+
+		.row {
+
+			&:nth-child(odd) {
+				@include min(md) {
+					justify-content: flex-end;
+				}
+
+				.content_block {
+					left: auto;
+					top: auto;
+					right: rem(50);
+					bottom: rem(-104);
+
+					@include min(md) {
+						&--wrapper {
+							text-align: right;
+						}
+					}
+
+					&--top {
+						display: none;
+					}
+
+					&--bottom {
+						display: block;
+						@include min(md) {
+							margin: rem(-100 35 -50 0);
+						}
+						@include min(xl) {
+							margin: rem(-114 35 -72 0);
+						}
+					}
+				}
+			}
+		}
+
+		.content_block {
+			padding: rem(15 20 10);
+			@include min(md) {
+				border: 1px solid $b;
+				background: $light;
+				text-align: left;
+				max-width: rem(411);
+				display: inline-block;
+			}
+			@include min(xl) {
+				padding: rem(26 38 15);
+			}
+			@include max(md) {
+				max-width: 327px;
+				margin-left: auto;
+				margin-right: auto;
+				p {
+					text-align: left;
+				}
+			}
+
+			&--wrapper {
+				margin-top: rem(15);
+				@include min(md) {
+					margin-top: 0;
+					text-align: left;
+					position: relative;
+				}
+			}
+
+			&--top {
+				display: none;
+				@include min(md) {
+					margin: rem(-106 0 -120 105);
+				}
+				@include min(xl) {
+					display: block;
+				}
+			}
+
+			&--bottom {
+				@include min(md) {
+					margin: rem(-90 0 -50 60);
+				}
+				@include min(xl) {
+					display: none;
+				}
+			}
+
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				margin-bottom: rem(13);
+			}
+		}
+	}
+}

@@ -1,0 +1,106 @@
+.module_slider {
+	display: flex;
+	flex-direction: column;
+	gap: clamp-rem(25, 47, 575, 991);
+	padding: rem(15);
+	position: relative;
+	@include min(lg) {
+		padding: 0;
+	}
+
+	.svg {
+		&_5 {
+			position: absolute;
+			left: 0;
+			top: 0;
+			transform: translate(-1%, 28%);
+			@include max(xl) {
+				width: 350px;
+				height: auto;
+			}
+		}
+	}
+
+	.swiper {
+		width: 100%;
+	}
+
+	.swiper-slide {
+		//max-width: rem(1160);
+		@include min(md) {
+			max-width: 500px;
+		}
+		@include min(lg) {
+			max-width: 1000px;
+		}
+		@include min(xl) {
+			max-width: rem(1160);
+		}
+	}
+
+	.slide {
+		&_block {
+			gap: clamp-rem(17, 53, 575, 1200);
+		}
+
+		&_img {
+			text-align: center;
+			width: calc(100% - 18px);
+			@include min(sm) {
+			width: 50%;
+			}
+			@include min(xl) {
+				width: 58%;
+			}
+		}
+
+		&_content {
+			text-align: center;
+			@include min(md) {
+				line-height: 2.2;
+			}
+			@include min(lg) {
+				text-align: left;
+				margin-bottom: rem(48);
+				flex: 1 1;
+				padding: 0;
+			}
+
+			hr {
+				@include max(lg) {
+					margin-left: auto;
+					margin-right: auto;
+				}
+			}
+
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				margin-bottom: rem(13);
+			}
+
+			hr {
+				max-width: rem(402);
+			}
+
+			.btn-group {
+				margin-top: rem(30);
+				@include max(lg) {
+					justify-content: center;
+				}
+				@include max(sm) {
+					flex-direction: column;
+					align-items: unset;
+				}
+			}
+		}
+	}
+
+	.swiper-pagination {
+		position: static;
+		margin-top: clamp-rem(1, 105, 575, 1200);
+	}
+}

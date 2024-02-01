@@ -1,0 +1,132 @@
+/**
+ * Swiper
+ * Most modern mobile touch slider and framework with hardware accelerated transitions
+ * https://swiperjs.com
+ *
+ */
+$themeColor: $w;
+
+// base styles
+@import "swiper/swiper";
+
+// modules:
+@import "swiper/modules/navigation/navigation";
+@import "swiper/modules/pagination/pagination";
+@import "swiper/modules/effect-fade/effect-fade";
+@import "swiper/modules/free-mode/free-mode";
+@import "swiper/modules/grid/grid";
+@import "swiper/modules/scrollbar/scrollbar";
+@import "swiper/modules/thumbs/thumbs";
+
+// Custom styling:
+.swiper-container-horizontal {
+	> .swiper-pagination-bullets {
+		bottom: rem(24);
+	}
+}
+
+.swiper-slide {
+	box-sizing: border-box;
+
+	img.lazyload:not(.loaded) {
+		visibility: hidden;
+	}
+}
+
+.swiper-pagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: rem(8);
+	@include min(md) {
+		gap: rem(16);
+	}
+
+	&-bullet {
+		width: rem(8);
+		height: rem(8);
+		background-color: transparent;
+		opacity: 1;
+		margin: 0 !important;
+		position: relative;
+		@include min(md) {
+			width: rem(16);
+			height: rem(16);
+		}
+
+		&:after {
+			content: '';
+			width: rem(8);
+			height: rem(8);
+			background-color: rgba($b, .2);
+			position: absolute;
+			top: 0;
+			left: 0;
+			transition: transform $time ease-out;
+			@include tr();
+			@include min(md) {
+				width: rem(16);
+				height: rem(16);
+			}
+		}
+
+		&:not(.swiper-pagination-bullet-active) {
+			&:hover {
+				&:after {
+					background-color: $b;
+				}
+			}
+		}
+
+		&-active {
+			//width: rem(16);
+			//height: rem(16);
+			background-color: transparent;
+			pointer-events: none;
+
+			&:after {
+				background-color: $b;
+			}
+		}
+	}
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+	width: rem(32);
+	height: rem(32);
+	display: flex;
+	align-items: center;
+	//background-color: $w;
+	border-radius: 50%;
+	margin-top: rem(-16);
+	transition: box-shadow $time;
+
+	@include hover {
+		svg {
+			fill: $primary;
+		}
+	}
+
+	&:after {
+		display: none;
+	}
+
+	svg {
+		width: rem(32);
+		height: rem(32);
+		fill: $b;
+	}
+}
+
+.swiper-button-disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.swiper[data-slides="1"] {
+	.swiper-button-next,
+	.swiper-button-prev {
+		display: none !important;
+	}
+}
