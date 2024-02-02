@@ -81,9 +81,6 @@ $gallery_ids = get_field( 'gallery' );
 $nearby_group = get_field( 'nearby_group' );
 
 $location = get_field( 'buildings_subtitle' );
-$city     = get_field( 'city' );
-$state    = get_field( 'state' );
-$zip      = get_field( 'zip' );
 
 
 // Get the post's URL that will be shared
@@ -181,7 +178,7 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 			</p>
 			<h1 class="single_appartament__banner--title h3">
 				<?php echo $title; ?>
-				<?php echo $apartment_number ?>
+				<?php echo $apartment_number?>
 			</h1>
 			<span class="d-block single_appartament__banner--id visible-md-up">
 				ID#
@@ -196,7 +193,7 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 		<div class="container">
 			<div class="d-flex flex-wrap nav_grid">
 				<?php if ( $price ):
-					$price = number_format( $price, 0, '.', ',' );
+					$price = number_format($price, 0, '.', ',');
 					?>
 					<div class="nav_grid--elem price_block">
 						$<span><?php echo $price; ?></span>/<?php _e( 'month', '_it_start' ); ?>
@@ -643,15 +640,10 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 					</div>
 				</div>
 				<div class="col-md editor mt-4 mt-md-0">
-					<?php $title = str_replace( [ '#', ' ' ], [ '', '%20' ], get_the_title() );
-					$location    = str_replace( ' ', '%20', $location );
-					$city        = str_replace( ' ', '%20', $city );
-					$state       = str_replace( ' ', '%20', $state );
-					$zip         = str_replace( ' ', '%20', $zip );
-					?>
-
-					<!--					<iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=280%20--><?php //echo $title; ?><!--,%20--><?php //echo $location; ?><!--&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>-->
-					<iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=280%20<?php echo implode(',%20', array_filter([$title, $location, $city, $state, $zip])); ?>&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+					<?php $title = str_replace( [ '#', ' ' ], [ '', '%20' ], $title ); ?>
+					<?php $location = str_replace( ' ', '%20', $location ); ?>
+					<iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+							src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=280%20<?php echo $title; ?>,%20<?php echo $location; ?>&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
 				</div>
 			</div>
 		</div>
