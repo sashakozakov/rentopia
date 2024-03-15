@@ -14,6 +14,7 @@ if ($margin_bottom) {
 ?>
 <?php if ($content || $hiring_blocks) : ?>
 	<section class="<?php echo esc_attr($classes); ?>">
+<?php /*
 		<svg class="svg svg_7 visible-md-up" width="407" height="409" viewBox="0 0 407 409" fill="none"
 			 xmlns="http://www.w3.org/2000/svg">
 			<use xlink:href="#svg_elem_7"></use>
@@ -22,6 +23,7 @@ if ($margin_bottom) {
 			 xmlns="http://www.w3.org/2000/svg">
 			<use xlink:href="#svg_elem_8"></use>
 		</svg>
+ */ ?>
 		<div class="d-flex flex-column align-items-center">
 			<?php if ($content) : ?>
 				<div class="container">

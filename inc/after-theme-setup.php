@@ -158,7 +158,7 @@ add_filter( 'excerpt_more', '__return_empty_string' );
 
 
 //Changing the posts per page on first page without breaking pagination in WordPress
-add_action( 'pre_get_posts', 'rentopia_query_offset', 1 );
+//add_action( 'pre_get_posts', 'rentopia_query_offset', 1 );
 function rentopia_query_offset( &$query ) {
 
 	if ( is_admin() ) {
@@ -195,7 +195,7 @@ function rentopia_query_offset( &$query ) {
 	}
 }
 
-add_filter( 'found_posts', 'my_offset_pagination', 10, 2 );
+//add_filter( 'found_posts', 'my_offset_pagination', 10, 2 );
 function my_offset_pagination( $found_posts, $query ) {
 
 	if ( is_admin() ) {

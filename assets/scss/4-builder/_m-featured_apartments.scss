@@ -1,0 +1,51 @@
+.featured_apartments_module {
+	position: relative;
+	margin: rem(20 0) clamp-rem(80, 168, 767, 1200);
+
+	&--header {
+		position: relative;
+		margin-bottom: rem(37);
+		@include min(lg) {
+			padding: rem(0 220);
+		}
+	}
+
+	&--link {
+		color: $grey;
+		font-size: rem(18);
+		font-weight: 500;
+		@include min(lg) {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			right: 0;
+		}
+
+		&:hover {
+			color: $primary-hover;
+		}
+	}
+
+	&--title {
+		margin-bottom: 0;
+	}
+
+	.swiper-slide {
+		width: 78%;
+		@include min(sm) {
+			width: 50%;
+		}
+		@include min(md) {
+			width: 46%;
+		}
+		@include min(lg) {
+			width: 26%;
+		}
+		@include min(xl) {
+			width: 23%;
+		}
+		@include min(xxl) {
+			width: 17%;
+		}
+	}
+}

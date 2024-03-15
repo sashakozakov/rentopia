@@ -23,6 +23,7 @@
 			height: rem(33);
 			background-image: url('../img/logo.svg'); // client's logo
 			background-size: contain;
+			outline:none;
 			@include min(md) {
 				margin-bottom: rem(15);
 				width: rem(260);

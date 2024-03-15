@@ -20,13 +20,14 @@ $filtersearch  = $_GET['filtersearch'] ? $_GET['filtersearch'] : null;
 		$show_breadcrumbs = get_sub_field( 'show_breadcrumbs' );
 		$show_search_form = get_sub_field( 'show_search_form' );
 		$background       = get_sub_field( 'background' );
+		$background_url   = wp_get_attachment_image_url( $background, 'full' );
 		?>
 		<section class="hero_section bg d-flex flex-wrap"
-				 style="background-image: url(<?php echo wp_get_attachment_image_url( $background, 'full' ); ?>)">
+				 style="background-image: url(<?php echo esc_url($background_url); ?>)">
 			<svg width="1728" height="204" viewBox="0 0 1728 204" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path
 					d="M829.641 171C504.971 172.145 0 112.5 0 112.5V204H1728V0C1728 0 1672.71 37.0014 1630.69 57C1571.77 85.0433 1535.98 95.498 1472.69 112.5C1388.62 135.082 1339.31 141.12 1253.86 151.586L1250.48 152C1087.05 172.02 994.303 170.419 829.641 171Z"
-					fill="white"/>
+					fill="#f8f9f6"/>
 			</svg>
 
 			<div class="container">
@@ -78,148 +79,144 @@ $filtersearch  = $_GET['filtersearch'] ? $_GET['filtersearch'] : null;
 	<?php endwhile; ?>
 <?php endif; ?>
 
-	<div class="archive-wrapper">
-	<div class="container">
+	<div class="archive-wrapper search-archive-wrapper">
+		<div class="container">
 
 
-		<?php
+			<?php
+			if ( $bedrooms ) {
+				$bedrooms = array_map( function ( $bedroom ) {
+					return str_replace( '_bedroom', '', $bedroom );
+				}, $bedrooms );
+			}
+			if ( $price ) {
+				$prices = explode( '-', $price );
+			}
+			?>
 
-		if ( $bedrooms ) {
-			$bedrooms = array_map( function ( $bedroom ) {
-				return str_replace( '_bedroom', '', $bedroom );
-			}, $bedrooms );
-		}
-		if ( $price ) {
-			$prices = explode( '-', $price );
-		}
-		?>
+			<?php
+			$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+			$args  = array(
+				'posts_per_page' => 12,
+				'order'          => 'DESC',
+				'paged'          => $paged,
+				's'              => get_search_query(),
+			);
 
-<!--		--><?php //if ( $building_page == 'building' ): ?>
-<!--		<div class="row buildings__grid ajax_buildings__grid">-->
-<!--			--><?php //else: ?>
-			<div class="row">
-<!--				--><?php //endif; ?>
+			if ( $filtersearch ) {
+				$args['post_type'] = 'apartment';
+			} else {
+				$args['post_type'] = 'post';
+			}
 
-
-				<?php
-				$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
-				$args  = array(
-					'posts_per_page' => 9,
-					'order'          => 'DESC',
-					'paged'          => $paged,
-				);
-
-				if ( $filtersearch ) {
-//					if ($neighborhoods || $bedrooms || $price) {
-//						$args['post_type'] = array('apartment', 'building');
-//					} else {
-//						$args['post_type'] = 'apartment';
-//					}
-					$args['post_type'] = 'apartment';
-				}
-//				elseif ( $building_page == 'building' ) {
-//					$args['post_type'] = 'building';
-//					$args['posts_per_page'] = '10';
-//				}
-				else {
-					$args['post_type'] = 'post';
-				}
-
-				if ( $neighborhoods ) {
-					$args['tax_query'] = array(
-						'relation' => 'AND',
-						array(
-							'taxonomy' => 'neighborhood',
-							'field'    => 'slug',
-							'terms'    => $neighborhoods,
+			if ( $neighborhoods ) {
+				$args['tax_query'] = array(
+					'relation' => 'AND',
+					array(
+						'taxonomy' => 'neighborhood',
+						'field'    => 'slug',
+						'terms'    => $neighborhoods,
 //							'include_children' => true,
-							'operator' => 'IN'
-						),
-					);
-				}
+						'operator' => 'IN'
+					),
+				);
+			}
 
-				if ( $bedrooms && $price ) {
-					$args['meta_query'] = array(
-						'relation' => 'AND',
-						array(
-							'key'      => 'bedrooms',
-							'value'    => $bedrooms,
-							'operator' => 'IN'
-						),
-						array(
-							'key'     => 'price',
-							'value'   => $prices,
-							'type'    => 'numeric',
-							'compare' => 'BETWEEN'
-						),
-					);
-				} elseif ( $bedrooms ) {
+			if ( $bedrooms && $price ) {
+				$args['meta_query'] = array(
+					'relation' => 'AND',
+					array(
+						'key'      => 'bedrooms',
+						'value'    => $bedrooms,
+						'operator' => 'IN'
+					),
+					array(
+						'key'     => 'price',
+						'value'   => $prices,
+						'type'    => 'numeric',
+						'compare' => 'BETWEEN'
+					),
+				);
+			} elseif ( $bedrooms ) {
 
-					$args['meta_query'] = array(
-						'relation' => 'AND',
-						array(
-							'key'      => 'bedrooms',
-							'value'    => $bedrooms,
-							'operator' => 'IN'
-						),
-					);
-				} elseif ( $price ) {
-					$args['meta_query'] = array(
-						'relation' => 'AND',
-						array(
-							'key'     => 'price',
-							'value'   => $prices,
-							'type'    => 'numeric',
-							'compare' => 'BETWEEN'
-						),
-					);
-				}
+				$args['meta_query'] = array(
+					'relation' => 'AND',
+					array(
+						'key'      => 'bedrooms',
+						'value'    => $bedrooms,
+						'operator' => 'IN'
+					),
+				);
+			} elseif ( $price ) {
+				$args['meta_query'] = array(
+					'relation' => 'AND',
+					array(
+						'key'     => 'price',
+						'value'   => $prices,
+						'type'    => 'numeric',
+						'compare' => 'BETWEEN'
+					),
+				);
+			}
 
-				$search_posts = new WP_Query( $args );
-				if ( $search_posts->have_posts() ) : ?>
+			$search_posts = new WP_Query( $args ); ?>
+			<?php
+			if ( $neighborhoods ) {
+				$nb_encode = json_encode( $neighborhoods );
+				$nb_string = implode( ", ", json_decode( $nb_encode, true ) );
+			}
+
+			if ( $bedrooms ) {
+				$bd_encode = json_encode( $bedrooms );
+				$bd_string = implode( ", ", json_decode( $bd_encode, true ) );
+			}
+			?>
+			<div class="row ajax_search__grid"
+				 data-filter="<?php echo $filtersearch ? 'apartment' : 'post'; ?>"
+				 data-neighborhoods="<?php echo $nb_string ?? ''; ?>"
+				 data-bedrooms="<?php echo $bd_string ?? ''; ?>"
+				 data-price="<?php echo $price ?? ''; ?>"
+			>
+				<?php if ( $search_posts->have_posts() ) :
+					$count = $search_posts->post_count; ?>
 
 					<?php while ( $search_posts->have_posts() ) : $search_posts->the_post(); ?>
 
-<!--						--><?php //if ( $building_page == 'building' ): ?>
-<!--							--><?php //get_template_part( 'template-parts/components/buildings_loop' ); ?>
-<!--						--><?php //else: ?>
-							<div class="col-md-6 col-lg-4">
-								<?php if ( $filtersearch ): ?>
-									<?php get_template_part( 'template-parts/builder/components/appartament_item' ); ?>
-								<?php else: ?>
-									<?php get_template_part( 'template-parts/article' ); ?>
-								<?php endif; ?>
-							</div>
-<!--						--><?php //endif; ?>
+					<?php if ( $filtersearch ): ?>
+						<div class="col-xl-3 col-md-6 col-lg-4">
+							<?php get_template_part( 'template-parts/builder/components/new_appartament_item' ); ?>
+						</div>
+					<?php else: ?>
+						<?php get_template_part( 'template-parts/article' ); ?>
+					<?php endif; ?>
 
-					<?php endwhile; ?>
-
-					<div class="pagination">
-						<?php echo paginate_links( array(
-							'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-							'total'        => $search_posts->max_num_pages,
-							'current'      => max( 1, get_query_var( 'paged' ) ),
-							'format'       => '?paged=%#%',
-							'show_all'     => false,
-							'type'         => 'list',
-							'end_size'     => 2,
-							'mid_size'     => 1,
-							'prev_next'    => true,
-							'prev_text'    => __( 'Previous', '_it_start' ),
-							'next_text'    => __( 'Next', '_it_start' ),
-							'add_args'     => false,
-							'add_fragment' => '',
-						) ); ?>
-					</div>
+				<?php endwhile; ?>
 
 				<?php else : ?>
 
-					<div class="col-lg-6">
+					<div class="col-12">
 						<?php get_template_part( 'template-parts/content-none' ); ?>
 					</div>
 
 				<?php endif; ?>
 			</div>
+
+			<?php
+			if ( $count >= 12 ) {
+				$wrapper = 'text-center mt-5 pt-3 preloader_container';
+				$title   = __( 'Load more', 'rentopia' );;
+				$class  = 'load-more-btn btn btn-outline btn-md';
+				$url    = "#";
+				$target = false;
+				get_template_part( 'template-parts/components/button', null, [
+					'classes' => $class,
+					'title'   => $title,
+					'url'     => $url,
+					'target'  => $target,
+					'wrapper' => $wrapper
+				] );
+			}
+			?>
 
 		</div>
 	</div>

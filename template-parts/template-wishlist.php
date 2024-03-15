@@ -9,7 +9,7 @@ the_post();
 		<svg width="1728" height="204" viewBox="0 0 1728 204" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
 				d="M829.641 171C504.971 172.145 0 112.5 0 112.5V204H1728V0C1728 0 1672.71 37.0014 1630.69 57C1571.77 85.0433 1535.98 95.498 1472.69 112.5C1388.62 135.082 1339.31 141.12 1253.86 151.586L1250.48 152C1087.05 172.02 994.303 170.419 829.641 171Z"
-				fill="white"/>
+				fill="#f8f9f6"/>
 		</svg>
 
 		<div class="container">
@@ -23,14 +23,11 @@ the_post();
 <?php
 $favorites = get_user_favorites();
 //$fav = get_user_favorites($user_id = 1, $site_id = null, $include_links = false, $filters = null, $include_button = false, $include_thumbnails = true, $thumbnail_size = 'thumbnail', $include_excerpt = false);
-//var_dump($fav);
-//var_dump($favorites);
 
 $args = array(
 	'post_type' => 'apartment',
 	'posts_per_page' => -1,
 	'post__in' => $favorites,
-//	'post__in' => array(438,426)
 );
 $query = new WP_Query($args); ?>
 <?php if ($query->have_posts()): ?>
@@ -51,7 +48,7 @@ $query = new WP_Query($args); ?>
 			<div class="row appartaments__grid">
 				<?php while ($query->have_posts()): $query->the_post(); ?>
 					<div class="col-lg-4 col-md-6">
-						<?php get_template_part('template-parts/builder/components/appartament_item'); ?>
+						<?php get_template_part('template-parts/builder/components/new_appartament_item'); ?>
 					</div>
 				<?php endwhile; ?>
 			</div>

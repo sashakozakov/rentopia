@@ -18,12 +18,14 @@ if ($margin_bottom) {
 ?>
 <section class="<?php echo esc_attr($classes); ?>">
 
+	<?php /*
 	<?php if ($show_decor_element) : ?>
 		<svg class="svg svg_11 visible-md-up" width="348" height="324" viewBox="0 0 348 324" fill="none"
 			 xmlns="http://www.w3.org/2000/svg">
 			<use xlink:href="#svg_elem_11"></use>
 		</svg>
 	<?php endif; ?>
+ */ ?>
 	<?php if ($image && $img_out) : ?>
 		<div class="img_block mb-4 mb-md-0 <?php echo $columns_reverse ? ' img_left' : 'img_right'; ?>">
 			<?php echo wp_get_attachment_image($image, 'full'); ?>

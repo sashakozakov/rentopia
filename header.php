@@ -14,7 +14,7 @@ $has_hero      = false;
 if ( have_rows( 'builder' ) ) {
 	while ( have_rows( 'builder' ) ) {
 		the_row();
-		if ( get_row_layout() == 'hero' ) {
+		if ( get_row_layout() == 'hero' || get_row_layout() == 'new_hero' ) {
 			$has_hero = true;
 		}
 	}
@@ -56,7 +56,7 @@ $extra_classes = $has_hero ? 'has-hero' : ''; // page with Hero requires extra h
 			] );
 			?>
 
-			<form class="header__search visible-lg-up" id="searchform" role="search"
+			<form class="header__search visible-lg-up d-none" id="searchform" role="search"
 				  action="<?php echo esc_url( home_url() ); ?>">
 				<button class="header__search--submit" type="submit">
 					<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -80,10 +80,10 @@ $extra_classes = $has_hero ? 'has-hero' : ''; // page with Hero requires extra h
 
 			<?php if ( is_user_logged_in() ) : ?>
 				<a href="<?php echo esc_url( wp_logout_url() ) ?>"
-				   class="btn btn-outline mt-auto ml-1"><?php _e( 'Log Out', '_it_start' ); ?></a>
+				   class="btn btn-outline ml-1"><?php _e( 'Log Out', '_it_start' ); ?></a>
 			<?php else: ?>
 				<a href="<?php echo esc_url( wp_login_url() ) ?>"
-				   class="btn btn-outline mt-auto mr-3"><?php _e( 'Log In', '_it_start' ); ?></a>
+				   class="btn btn-outline mr-3"><?php _e( 'Login', '_it_start' ); ?></a>
 			<?php endif; ?>
 
 			<?php if ( $header_button ) : ?>

@@ -8,7 +8,7 @@ the_post();
 		<svg class="svg submit_application_section_svg_1" width="437" height="387" viewBox="0 0 437 387" fill="none"
 			 xmlns="http://www.w3.org/2000/svg">
 			<path opacity="0.4" d="M-95.6142 84.6635L238.613 2.36512L431.16 7.53031L32.7719 382.713L-95.6142 84.6635Z"
-				  stroke="#01CCAD" stroke-width="4"/>
+				  stroke="#B8C83F" stroke-width="4"/>
 		</svg>
 		<svg class="svg submit_application_section_svg_2" width="315" height="455" viewBox="0 0 315 455" fill="none"
 			 xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +39,7 @@ the_post();
 					<div class="application_block">
 						<div class="application_block--inner">
 							<div class="application_block--img">
-								<img src="https://rentopiagroup.com/wp-content/uploads/2023/08/application3.png" alt="">
+								<img src="https://rentopiagroup.com/wp-content/uploads/2023/08/application3.svg" alt="">
 							</div>
 							<h2 class="application_block--title h4">
 								Bank Debit
@@ -74,7 +74,7 @@ the_post();
 					<div class="application_block">
 						<div class="application_block--inner">
 							<div class="application_block--img">
-								<img src="https://rentopiagroup.com/wp-content/uploads/2023/08/application4.png" alt="">
+								<img src="https://rentopiagroup.com/wp-content/uploads/2023/08/application4.svg" alt="">
 							</div>
 							<h2 class="application_block--title h4">
 								Credit Card
@@ -99,7 +99,7 @@ the_post();
 									</tr>
 									</tfoot-->
 								</table>
- 
+
 								<a href="https://rentopiagroup.com/initial-deposit-credit-card/" class="pay_btn btn">Pay</a>
 							</div>
 						</div>

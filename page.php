@@ -21,7 +21,8 @@ the_post();
 
 	<?php get_template_part( 'template-parts/builder' ); ?>
 
-<?php endif;
+<?php else:
+
 $the_content     = apply_filters( 'the_content', get_the_content() );
 $hide_page_title = get_field( 'hide_page_title' );
 ?>
@@ -40,6 +41,7 @@ $hide_page_title = get_field( 'hide_page_title' );
 		</div>
 	</div>
 <?php } ?>
+<?php endif; ?>
 
 
 <?php

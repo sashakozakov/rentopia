@@ -4,15 +4,24 @@
 	position: relative;
 	padding: rem(98 0 80);
 	border-radius: rem(0 0 268 0);
-	@include min(sm) {
+	@include min(md) {
 		padding: rem(185 0 80);
 		border-radius: 0;
 		height: 80vh;
 		max-height: 802px;
 	}
+	@include max(sm) {
+		min-height: 30vh;
+		height: auto;
+	}
+	@media screen and (max-height: 430px){
+		padding-top: rem(90);
+		min-height: 30vh;
+		height: auto;
+	}
 
 	& + .mt-sm {
-		margin-top: 63px;
+		margin-top: rem(63);
 	}
 
 	.page-template-template-portfolio & {
@@ -37,6 +46,15 @@
 	.breadcrumbs {
 		color: $w;
 		margin-bottom: rem(82);
+
+		.search & {
+			@include max(sm) {
+				margin-bottom: rem(20);
+			}
+			@media screen and (max-height: 430px){
+				margin-bottom: rem(20);
+			}
+		}
 
 		a,
 		.breadcrumb_last {
@@ -69,6 +87,15 @@
 
 	.search_banner__form {
 		margin-top: clamp-rem(50, 131, 575, 1200);
+
+		.search & {
+			@include max(sm) {
+				margin-top: rem(20);
+			}
+			@media screen and (max-height: 430px){
+				margin-top: rem(20);
+			}
+		}
 	}
 }
 

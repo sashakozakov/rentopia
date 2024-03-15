@@ -15,7 +15,7 @@
 		</div>
 		<div class="building__item--caption">
 			<span class="building__item--label visible-lg-up">
-				<?php _e( 'available Units', '_it_start' ); ?>
+				<?php _e( 'available Units', 'rentopia' ); ?>
 			</span>
 			<h5 class="building__item--title">
 				<?php the_title(); ?>

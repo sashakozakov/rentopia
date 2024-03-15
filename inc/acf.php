@@ -16,6 +16,7 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 global $ACFE_SECTION_BUILDERS;
 $ACFE_SECTION_BUILDERS = array(
 	// existing flexible content layouts:
+	'new_hero',
 	'hero',
 	'intro_banner',
 	'statistic',
@@ -27,6 +28,9 @@ $ACFE_SECTION_BUILDERS = array(
 	'hiring',
 	'tiles_blocks',
 	'team',
+	'featured_apartments',
+	'who_we_are',
+	'testimonials',
 );
 
 if ( $ACFE_SECTION_BUILDERS && count( $ACFE_SECTION_BUILDERS ) > 0 && is_admin() ) {

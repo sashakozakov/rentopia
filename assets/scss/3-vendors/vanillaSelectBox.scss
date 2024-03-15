@@ -20,13 +20,16 @@ li[data-parent].open:not(.hidden-search) {
 	display: block;
 	visibility: hidden;
 	position: absolute; /*Don't change*/
-	border: 1px solid #B2B2B2;
-	background-color: #fff;
 	background-clip: padding-box;
-	border: 1px solid rgba(0, 0, 0, .15);
-	box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-	border-radius: 4px;
+	border: none;
+	//box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 0;
 	padding: 20px 0;
+	border-bottom: 5px solid $primary-hover;
+	@include min(sm) {
+		background-color: $body_bg;
+	}
 }
 
 .vsb-js-search-zone {
@@ -90,7 +93,7 @@ li.short {
 	text-align: left;
 	z-index: 1;
 	color: #333;
-	background: white !important;
+	background: white;
 	border: 1px solid #999 !important;
 	line-height: 20px;
 	padding: 6px 12px;
@@ -105,6 +108,11 @@ li.short {
 .vsb-main .title {
 	margin-right: 6px;
 	user-select: none;
+	font-size: 19px;
+	white-space: nowrap;
+	max-width: calc(100% - 40px);
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .vsb-main li:hover {
@@ -116,9 +124,8 @@ li.short {
 }
 
 .vsb-menu li {
-	background-color: #fff;
 	min-height: 1.4em;
-	padding: 12px 2em 12px 30px;
+	padding: 10px 2em 10px 30px;
 	position: relative;
 
 	&:before {
@@ -134,6 +141,11 @@ li.short {
 		padding: 0.3125rem;
 		margin-top: 0.4375rem;
 		color: $b;
+	}
+	&:hover {
+		&:before {
+			background: $primary;
+		}
 	}
 }
 
@@ -203,7 +215,6 @@ li.short {
 }
 
 .vsb-menu .multi li {
-	background-color: #fff;
 	padding-left: 30px;
 }
 

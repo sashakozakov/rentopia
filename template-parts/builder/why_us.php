@@ -12,10 +12,12 @@ if ($margin_bottom) {
 }
 ?>
 <section class="<?php echo esc_attr($classes); ?>">
+	<?php /*
 	<svg class="svg svg_6" width="449" height="387" viewBox="0 0 449 387" fill="none"
 		 xmlns="http://www.w3.org/2000/svg">
 		<use xlink:href="#svg_elem_6"></use>
 	</svg>
+ */ ?>
 	<div class="container d-flex flex-column">
 		<?php if ($content) : ?>
 			<div class="module_why_us--content text-lg">

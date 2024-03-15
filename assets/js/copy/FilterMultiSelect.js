@@ -208,12 +208,12 @@ function filterMultiSelect(domSelector, options) {
 		if (selector === ".vsb-main button") {
 			cssArray = [
 				{ "key": "min-width", "value": "120px" },
-				{ "key": "border-radius", "value": "0" },
+				// { "key": "border-radius", "value": "0" },
 				{ "key": "width", "value": "100%" },
 				{ "key": "text-align", "value": "left" },
 				{ "key": "z-index", "value": "1" },
 				{ "key": "color", "value": "#333" },
-				{ "key": "background", "value": "white !important" },
+				// { "key": "background", "value": "white !important" },
 				// { "key": "border", "value": "1px solid #999 !important" },
 				{ "key": "line-height", "value": "20px" },
 				// { "key": "font-size", "value": "14px" },
@@ -297,9 +297,9 @@ function filterMultiSelect(domSelector, options) {
 
 		caret.classList.add("caret");
 		if(this.keepInlineCaretStyles) {
-			caret.style.position = "absolute";
-			caret.style.right = "17px";
-			caret.style.marginTop = "8px";
+			// caret.style.position = "absolute";
+			// caret.style.right = "17px";
+			// caret.style.marginTop = "8px";
 		}
 
 		if (self.userOptions.stayOpen) {

@@ -9,7 +9,7 @@
 
 ?>
 
-<article class="article article-no-results">
+<article class="article-no-results">
 	<div class="article__content">
 		<h3 class="article__title"><?php esc_html_e( 'Nothing Found', '_it_start' ); ?></h3>
 	</div>

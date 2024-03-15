@@ -13,6 +13,7 @@ if ($margin_bottom) {
 ?>
 <section class="<?php echo esc_attr($classes); ?>">
 
+<?php /*
 	<svg class="svg svg_9" width="373" height="455" viewBox="0 0 373 455" fill="none"
 		 xmlns="http://www.w3.org/2000/svg">
 		<use xlink:href="#svg_elem_9"></use>
@@ -21,6 +22,7 @@ if ($margin_bottom) {
 		 xmlns="http://www.w3.org/2000/svg">
 		<use xlink:href="#svg_elem_10"></use>
 	</svg>
+ */ ?>
 	<div class="container d-flex flex-column">
 
 		<div class="module_tiles_blocks--content">

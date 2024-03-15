@@ -16,6 +16,7 @@
                 "class": "",
                 "id": ""
             },
+            "acfe_save_meta": 0,
             "acfe_flexible_advanced": 1,
             "acfe_flexible_stylised_button": 1,
             "acfe_flexible_layouts_templates": 0,
@@ -42,16 +43,16 @@
                 "acfe_flexible_modal_categories": "0"
             },
             "layouts": {
-                "layout_631619aec7e5e": {
-                    "key": "layout_631619aec7e5e",
-                    "name": "hero",
-                    "label": "Hero",
+                "layout_65be068dce8db": {
+                    "key": "layout_65be068dce8db",
+                    "name": "new_hero",
+                    "label": "New Hero",
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_631705f54b2ea",
-                            "label": "Hero Clone",
-                            "name": "hero_clone",
+                            "key": "field_65be0693ce8de",
+                            "label": "New Hero clone",
+                            "name": "new_hero_clone",
                             "aria-label": "",
                             "type": "clone",
                             "instructions": "",
@@ -62,8 +63,9 @@
                                 "class": "",
                                 "id": ""
                             },
+                            "acfe_save_meta": 0,
                             "clone": [
-                                "group_64032815ec004"
+                                "group_65be062e4ec82"
                             ],
                             "display": "seamless",
                             "layout": "block",
@@ -581,6 +583,144 @@
                     "acfe_flexible_settings_size": "medium",
                     "acfe_flexible_modal_edit_size": false,
                     "acfe_flexible_category": false
+                },
+                "layout_65be2f34b956b": {
+                    "key": "layout_65be2f34b956b",
+                    "name": "featured_apartments",
+                    "label": "Featured apartments",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_65be2f37b956e",
+                            "label": "Featured apartments clone",
+                            "name": "featured_apartments_clone",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_save_meta": 0,
+                            "clone": [
+                                "group_65be2ef0b573e"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0,
+                            "acfe_seamless_style": 0,
+                            "acfe_clone_modal": 0,
+                            "acfe_clone_modal_close": 0,
+                            "acfe_clone_modal_button": "",
+                            "acfe_clone_modal_size": "large"
+                        }
+                    ],
+                    "min": "",
+                    "max": "",
+                    "acfe_flexible_thumbnail": "",
+                    "acfe_flexible_render_template": false,
+                    "acfe_flexible_render_style": false,
+                    "acfe_flexible_render_script": false,
+                    "acfe_flexible_settings": false,
+                    "acfe_flexible_settings_size": "medium",
+                    "acfe_flexible_modal_edit_size": false,
+                    "acfe_flexible_category": false
+                },
+                "layout_65bf3712e6699": {
+                    "key": "layout_65bf3712e6699",
+                    "name": "who_we_are",
+                    "label": "Who we are",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_65bf3715e669c",
+                            "label": "Who we are clone",
+                            "name": "who_we_are_clone",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_save_meta": 0,
+                            "clone": [
+                                "group_65bf364eb0f4a"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0,
+                            "acfe_seamless_style": 0,
+                            "acfe_clone_modal": 0,
+                            "acfe_clone_modal_close": 0,
+                            "acfe_clone_modal_button": "",
+                            "acfe_clone_modal_size": "large"
+                        }
+                    ],
+                    "min": "",
+                    "max": "",
+                    "acfe_flexible_thumbnail": "",
+                    "acfe_flexible_render_template": false,
+                    "acfe_flexible_render_style": false,
+                    "acfe_flexible_render_script": false,
+                    "acfe_flexible_settings": false,
+                    "acfe_flexible_settings_size": "medium",
+                    "acfe_flexible_modal_edit_size": false,
+                    "acfe_flexible_category": false
+                },
+                "layout_65c955e405db6": {
+                    "key": "layout_65c955e405db6",
+                    "name": "testimonials",
+                    "label": "Testimonials",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_65c955e705db9",
+                            "label": "Testimonials clone",
+                            "name": "testimonials_clone",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_save_meta": 0,
+                            "clone": [
+                                "group_65c95548387f7"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0,
+                            "acfe_seamless_style": 0,
+                            "acfe_clone_modal": 0,
+                            "acfe_clone_modal_close": 0,
+                            "acfe_clone_modal_button": "",
+                            "acfe_clone_modal_size": "large"
+                        }
+                    ],
+                    "min": "",
+                    "max": "",
+                    "acfe_flexible_thumbnail": "",
+                    "acfe_flexible_render_template": false,
+                    "acfe_flexible_render_style": false,
+                    "acfe_flexible_render_script": false,
+                    "acfe_flexible_settings": false,
+                    "acfe_flexible_settings_size": "medium",
+                    "acfe_flexible_modal_edit_size": false,
+                    "acfe_flexible_category": false
                 }
             },
             "min": "",
@@ -603,6 +743,13 @@
                 "operator": "==",
                 "value": "default"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "building"
+            }
         ]
     ],
     "menu_order": 0,
@@ -621,5 +768,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1681070781
+    "modified": 1708292405
 }

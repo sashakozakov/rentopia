@@ -13,6 +13,18 @@
 
 .search_banner {
 	padding: rem(0 0 50);
+	@include max(sm) {
+		position: relative;
+		&:before {
+			position: absolute;
+			content: '';
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 110px;
+			background: linear-gradient(to bottom, rgba($w, .7), transparent);
+		}
+	}
 
 	&__mask {
 		max-width: rem(700);
@@ -52,7 +64,11 @@
 
 		img {
 			display: inline-block;
-			margin-bottom: -26px;
+			max-width: 679px;
+			margin-top: 10px;
+			max-height: 454px;
+			width: auto;
+			//margin-bottom: -26px;
 		}
 	}
 
@@ -70,10 +86,10 @@
 		max-width: rem(1030);
 		width: 100%;
 		display: none;
-		border-radius: rem(15 15 0 0);
+		border-radius: 50px;
+		box-shadow: 0 0 65px rgba(24, 27, 8, 0.07);
 		@include min(sm) {
-			border-radius: 0;
-			border: 1px solid $b;
+			border: 1px solid $w;
 			display: flex !important;
 			flex-wrap: wrap;
 		}
@@ -95,25 +111,50 @@
 				width: 30px;
 				background: $grey;
 				border-radius: 2px;
+
+				&:before {
+					position: absolute;
+					content: '';
+					top: -20px;
+					bottom: -20px;
+					left: -20px;
+					right: -20px;
+				}
 			}
 		}
 
 		input[type="text"] {
 			flex: 1 1 75%;
-			border-radius: 0;
 			border: none;
 			border-right: 1px solid $b;
+			backdrop-filter: blur(10px);
+			background: rgba($w, .5);
+			border-radius: rem(50 0 0 50);
 		}
 
 		> div {
 			flex: 1 1 100%;
+			max-width: 100%;
 			@include min(sm) {
-				border-right: 1px solid $b;
+				border-right: 1px solid $grey;
 				flex: 1 1 33%;
+				max-width: 33%;
 			}
 			@include min(md) {
 				flex: 1 1 25%;
+				max-width: 25%;
 			}
+
+			&:nth-child(2) {
+				.vsb-main {
+					& > button {
+						@include min(md) {
+							border-radius: 50px 0 0 50px;
+						}
+					}
+				}
+			}
+
 			@include max(md) {
 				&:last-of-type {
 					border-right: none;
@@ -231,6 +272,13 @@
 			button {
 				border: none !important;
 				max-width: 100% !important;
+
+				background: rgba($w, .5);
+				backdrop-filter: blur(10px);
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: center;
 				@include max(sm) {
 					padding-left: 0 !important;
 					padding-right: 0 !important;
@@ -246,19 +294,23 @@
 
 		> button {
 			background: $primary;
-			border-radius: 0;
-			border: none;
-			text-transform: uppercase;
 			color: $w;
+			border: none;
 			cursor: pointer;
+			font-size: clamp-rem(16, 18, 575, 991);
 			@include tr();
 			flex: 1 1 100%;
-			@include min(sm) {
-				border-top: 1px solid $b;
-			}
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
 			@include min(md) {
+				background: rgba($w, .5);
+				color: $b;
+				backdrop-filter: blur(10px);
 				flex: 1 1 25%;
 				border-top: none;
+				border-radius: 0 50px 50px 0;
 			}
 			@include max(sm) {
 				width: 100%;
@@ -267,13 +319,33 @@
 
 			svg {
 				path {
-					stroke: $w;
+					@include tr;
+					@include max(md) {
+						fill: $w;
+					}
 				}
 			}
 
 			&:hover {
-				background: $b;
+				background: rgba($primary, .5);
 				color: $w;
+
+				svg {
+					path {
+						fill: $w;
+					}
+				}
+			}
+
+			&:focus {
+				background: rgba($primary-hover, .5);
+				color: $w;
+
+				svg {
+					path {
+						fill: $w;
+					}
+				}
 			}
 		}
 	}

@@ -89,6 +89,33 @@ $themeColor: $w;
 			}
 		}
 	}
+
+	&.new_pagination_style {
+		margin-top: rem(30);
+		position: static;
+		gap: rem(4);
+
+		.swiper-pagination-bullet {
+			height: rem(7);
+			width: rem(7);
+			@include tr;
+
+			&:after {
+				@include tr;
+				height: 100%;
+				width: 100%;
+				background: $dark;
+				border-radius: 50px;
+			}
+
+			&-active {
+				width: rem(25);
+				&:after {
+					background: $primary;
+				}
+			}
+		}
+	}
 }
 
 .swiper-button-next,

@@ -16,7 +16,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	background: $w; // Fallback for when there is no custom background color defined.
+	background: $body_bg; // Fallback for when there is no custom background color defined.
 	color: $color-text;
 	font-size: rem($font-size-base);
 	font-family: $font-text;
@@ -43,7 +43,7 @@ body {
 
 
 p, li {
-	letter-spacing: .5px;
+	letter-spacing: 0; //.5px;
 }
 
 img {
@@ -205,7 +205,7 @@ iframe[src*="vimeo"] {
 		display: block;
 		width: rem(40);
 		height: rem(40);
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid'%3E%3Ccircle cx='50' cy='50' fill='none' stroke-linecap='round' r='40' stroke-width='5' stroke='%2301CCAD' stroke-dasharray='62.83185307179586 62.83185307179586' transform='rotate(299.873 50 50)'%3E%3CanimateTransform attributeName='transform' type='rotate' calcMode='linear' values='0 50 50;360 50 50' keyTimes='0;1' dur='1.5s' begin='0s' repeatCount='indefinite'/%3E%3C/circle%3E%3C/svg%3E");
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid'%3E%3Ccircle cx='50' cy='50' fill='none' stroke-linecap='round' r='40' stroke-width='5' stroke='%23B8C83F' stroke-dasharray='62.83185307179586 62.83185307179586' transform='rotate(299.873 50 50)'%3E%3CanimateTransform attributeName='transform' type='rotate' calcMode='linear' values='0 50 50;360 50 50' keyTimes='0;1' dur='1.5s' begin='0s' repeatCount='indefinite'/%3E%3C/circle%3E%3C/svg%3E");
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
 		background-size: contain;

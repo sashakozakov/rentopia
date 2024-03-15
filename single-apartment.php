@@ -140,13 +140,13 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 				 xmlns="http://www.w3.org/2000/svg">
 				<path
 					d="M44 28.5C25.5385 20.3077 16.0494 14.6634 0 3.5V67H375.5V0C375.5 0 361.5 9 352 14C342.5 19 315.5 29.5 304 33.5C292.5 37.5 277 41.5 258 45.5C239 49.5 231 50 209.5 52C188 54 174 54.5 163.5 54C153 53.5 125 51 106.5 47.5C88 44 61 35 44 28.5Z"
-					fill="white"/>
+					fill="#f8f9f6"/>
 			</svg>
 			<svg class="visible-md-up" width="1045" height="635" viewBox="0 0 1045 635" fill="none"
 				 xmlns="http://www.w3.org/2000/svg">
 				<path
 					d="M1 0V24.316C1.51504 66.1878 4.80853 94.9145 10 138C13.5197 171.002 17.7132 186.88 21.5 213.5C27.0202 247.409 32.1388 265.632 40.5 298.5C52.1259 340.376 59.9608 363.17 78.5 403.5C97.3343 443.377 105.769 458.098 125.5 488C140.315 508.678 149.471 520.234 166 537.5C183.066 556.546 193.559 565.076 213.5 579C238.995 596.864 254.718 603.756 284 615L284.267 615.088C305.556 622.149 317.514 626.115 342 629.5C362.78 632.892 377.793 633.108 407 633L473.5 625L508 618C508 618 530 612 541.5 608.5C553 605 561.5 601 561.5 601C567.403 598.387 616.201 575.758 624.5 571.5C664.992 552.659 673.294 549.418 715.5 531.5C715.5 531.5 821 490 860.5 477C900 464 953.5 449 953.5 449L1003.5 435.5L1045 425V635H1V24.316C0.906329 16.7007 0.904563 8.65047 1 0Z"
-					fill="white"/>
+					fill="#f8f9f6"/>
 			</svg>
 		</div>
 
@@ -671,7 +671,8 @@ $query = new WP_Query( $args ); ?>
 			<div class="row appartaments__grid">
 				<?php while ( $query->have_posts() ): $query->the_post(); ?>
 					<div class="col-lg-4 col-md-6">
-						<?php get_template_part( 'template-parts/builder/components/appartament_item' ); ?>
+<!--						--><?php //get_template_part( 'template-parts/builder/components/appartament_item' ); ?>
+						<?php get_template_part( 'template-parts/builder/components/new_appartament_item' ); ?>
 					</div>
 				<?php endwhile; ?>
 			</div>

@@ -1,20 +1,18 @@
 .btn {
 	@include tr;
-	text-transform: uppercase;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	gap: rem(12);
 	background-color: $primary;
-	color: $w;
-	border-radius: 0;
+	color: $b;
+	border-radius: rem(50);
 	line-height: 1;
-	border: 1px solid $primary;
-	padding: rem(16 51);
+	border: 2px solid $primary;
+	padding: rem(7 22);
 	height: auto;
-	font-weight: 600;
-	font-size: rem(14);
-	letter-spacing: .5px;
+	font-weight: 500;
+	font-size: rem(18);
 	text-align: center;
 	cursor: pointer;
 
@@ -23,7 +21,7 @@
 	&:active {
 		background-color: $primary-hover;
 		border-color: $primary-hover;
-		color: $w;
+		color: $b;
 		box-shadow: none;
 		outline: none;
 	}
@@ -46,7 +44,6 @@
 .btn-outline {
 	background-color: transparent;
 	//border-color: $primary;
-	color: $primary;
 
 	> svg {
 		fill: $primary;
@@ -55,13 +52,15 @@
 	}
 
 	&:hover {
-		background-color: $primary;
-		border-color: $primary;
-		color: $w;
+		background-color: transparent;
+		border-color: $primary-hover;
+		//color: $w;
 
-		svg {
-			fill: $w;
-			stroke: $w;
+		&:not(.share-btn) {
+			svg {
+				fill: $primary-hover;
+				stroke: $primary-hover;
+			}
 		}
 	}
 }
@@ -72,7 +71,7 @@
 
 .show_more {
 	padding-right: rem(56);
-	background-image: url("data:image/svg+xml,%3Csvg width='50' height='10' viewBox='0 0 50 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M49.1666 5.69428C49.4129 5.44802 49.4129 5.04876 49.1666 4.80251L45.1536 0.789542C44.9074 0.543286 44.5081 0.543286 44.2619 0.789542C44.0156 1.0358 44.0156 1.43506 44.2619 1.68131L47.829 5.24839L44.2619 8.81548C44.0156 9.06173 44.0156 9.46099 44.2619 9.70725C44.5081 9.9535 44.9074 9.9535 45.1536 9.70725L49.1666 5.69428ZM0.796875 5.87897L48.7207 5.87897L48.7207 4.61782L0.796875 4.61781L0.796875 5.87897Z' fill='%2301CCAD'/%3E%3C/svg%3E%0A");
+	background-image: url("data:image/svg+xml,%3Csvg width='50' height='10' viewBox='0 0 50 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M49.1666 5.69428C49.4129 5.44802 49.4129 5.04876 49.1666 4.80251L45.1536 0.789542C44.9074 0.543286 44.5081 0.543286 44.2619 0.789542C44.0156 1.0358 44.0156 1.43506 44.2619 1.68131L47.829 5.24839L44.2619 8.81548C44.0156 9.06173 44.0156 9.46099 44.2619 9.70725C44.5081 9.9535 44.9074 9.9535 45.1536 9.70725L49.1666 5.69428ZM0.796875 5.87897L48.7207 5.87897L48.7207 4.61782L0.796875 4.61781L0.796875 5.87897Z' fill='%23B8C83F'/%3E%3C/svg%3E%0A");
 	text-transform: uppercase;
 	color: $primary;
 	font-size: rem(14);
@@ -81,7 +80,7 @@
 	@include tr();
 
 	&:hover {
-		background-image: url("data:image/svg+xml,%3Csvg width='50' height='10' viewBox='0 0 50 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M49.1666 5.69428C49.4129 5.44802 49.4129 5.04876 49.1666 4.80251L45.1536 0.789542C44.9074 0.543286 44.5081 0.543286 44.2619 0.789542C44.0156 1.0358 44.0156 1.43506 44.2619 1.68131L47.829 5.24839L44.2619 8.81548C44.0156 9.06173 44.0156 9.46099 44.2619 9.70725C44.5081 9.9535 44.9074 9.9535 45.1536 9.70725L49.1666 5.69428ZM0.796875 5.87897L48.7207 5.87897L48.7207 4.61782L0.796875 4.61781L0.796875 5.87897Z' fill='%23019982'/%3E%3C/svg%3E%0A");
+		background-image: url("data:image/svg+xml,%3Csvg width='50' height='10' viewBox='0 0 50 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M49.1666 5.69428C49.4129 5.44802 49.4129 5.04876 49.1666 4.80251L45.1536 0.789542C44.9074 0.543286 44.5081 0.543286 44.2619 0.789542C44.0156 1.0358 44.0156 1.43506 44.2619 1.68131L47.829 5.24839L44.2619 8.81548C44.0156 9.06173 44.0156 9.46099 44.2619 9.70725C44.5081 9.9535 44.9074 9.9535 45.1536 9.70725L49.1666 5.69428ZM0.796875 5.87897L48.7207 5.87897L48.7207 4.61782L0.796875 4.61781L0.796875 5.87897Z' fill='%237E8A2A'/%3E%3C/svg%3E%0A");
 	}
 
 	background-position: 100% 50%;
@@ -120,6 +119,7 @@
 input[type="submit"]:not(.draft) {
 	@extend .btn;
 }
+
 input[type="submit"].draft {
 	color: $primary;
 	background: transparent;
@@ -189,7 +189,7 @@ input[type="submit"].draft {
 
 			svg {
 				fill: $w;
-				stroke: $w;
+				//stroke: $w;
 				height: 32px;
 				width: auto;
 

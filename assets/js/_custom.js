@@ -21,11 +21,16 @@ $(document).ready(function () {
 	collectionsAjaxLoadMore();
 	portfolioAjaxLoadMore();
 	buildingsAjaxLoadMore();
+	blogAjaxLoadMore();
+	searchAjaxLoadMore();
+	taxCollectionsAjaxLoadMore();
+	taxNeighborhoodsAjaxLoadMore();
 	module_collections_slider();
 	filter_MultiSelect();
 	module_tiles_slider();
 	swiper_images();
 	module_why_us_slider();
+	apartamentCardSlider();
 
 	adminLoginForm();
 	adminListingFilter();
@@ -35,6 +40,7 @@ $(document).ready(function () {
 	agents_search();
 	edit_user_page();
 	datepicker();
+
 
 	$('.editor iframe').wrap('<div class="iframe_wrapper"></div>').wrap('<div></div>');
 
@@ -415,6 +421,10 @@ function filter_MultiSelect() {
 	$('.mobile_search__form_btn').on('click', function () {
 		$('.search_banner__form').slideDown();
 	});
+
+	$('.search_banner__form--close').on('click', function () {
+		$('.search_banner__form').slideUp();
+	});
 	$('.search_banner__form .vsb-main').each(function () {
 		$(this).on('click', function () {
 			var isActive = $(this).find('.vsb-menu').hasClass('active');
@@ -593,6 +603,7 @@ function portfolioAjaxLoadMore() {
 			$('.preloader_container').addClass('loading');
 
 			var next = $('.appartaments__grid .col-lg-4').length + 1;
+			var pageID = $('.appartaments__grid').attr('data-pageID');
 			var page = 2;
 
 			$.ajax({
@@ -601,7 +612,8 @@ function portfolioAjaxLoadMore() {
 				data: {
 					action: 'load_more_portfolio',
 					'page': page,
-					next: next
+					next: next,
+					pageID: pageID
 				},
 				success: function (response) {
 					$('.appartaments__grid').append(response);
@@ -609,7 +621,7 @@ function portfolioAjaxLoadMore() {
 					console.log(response);
 					// Hide the preloader
 					$('.preloader_container').removeClass('loading');
-					if ('' === response) {
+					if ('' === response || $('.appartaments__grid > div').length % 12 != 0) {
 						$('.load-more-btn').hide();
 						return;
 					}
@@ -624,37 +636,215 @@ function portfolioAjaxLoadMore() {
 
 function buildingsAjaxLoadMore() {
 	// Add event listener to the load more button
-	jQuery(document).ready(function ($) {
-		$('.buildings_section .load-more-btn').click(function (e) {
-			e.preventDefault();
-			$('.preloader_container').addClass('loading');
+	$('.buildings_section .load-more-btn').click(function (e) {
+		e.preventDefault();
+		$('.preloader_container').addClass('loading');
 
-			var next = $('.ajax_buildings__grid .col-xl-8.col-lg-7.col-sm-6').length + 1;
-			var page = 2;
+		var next = $('.ajax_buildings__grid .col-md-4.col-sm-6').length + 1;
+		var page = 2;
 
-			$.ajax({
-				url: wpApiSettings.ajaxUrl, // Make sure to define this in your PHP file
-				type: 'post',
-				data: {
-					action: 'load_more_buildings',
-					'page': page,
-					next: next,
-				},
-				success: function (response) {
-					$('.ajax_buildings__grid').append(response);
-					console.log(wpApiSettings.ajaxUrl);
-					console.log(response);
-					// Hide the preloader
-					$('.preloader_container').removeClass('loading');
-					if ('' === response) {
-						$('.load-more-btn').hide();
-						return;
-					}
-				},
-				error: function (xhr, ajaxOptions, thrownError) {
-					console.log(xhr.responseText);
+		$.ajax({
+			url: wpApiSettings.ajaxUrl, // Make sure to define this in your PHP file
+			type: 'post',
+			data: {
+				action: 'load_more_buildings',
+				'page': page,
+				next: next,
+			},
+			success: function (response) {
+				$('.ajax_buildings__grid').append(response);
+				// console.log(wpApiSettings.ajaxUrl);
+				// console.log(response);
+				// Hide the preloader
+				$('.preloader_container').removeClass('loading');
+				if ('' === response || $('.ajax_buildings__grid .col-md-4.col-sm-6').length % 3 != 0) {
+					$('.load-more-btn').hide();
+					return;
 				}
-			});
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				console.log(xhr.responseText);
+			}
+		});
+	});
+}
+
+function blogAjaxLoadMore() {
+	// Add event listener to the load more button
+	$('.blog-archive-wrapper .load-more-btn').click(function (e) {
+		e.preventDefault();
+		$('.preloader_container').addClass('loading');
+
+		var next = $('.ajax_blog__grid > div').length + 1;
+		var termId = $('.ajax_blog__grid').attr('data-term');
+		var page = 2;
+
+		$.ajax({
+			url: wpApiSettings.ajaxUrl, // Make sure to define this in your PHP file
+			type: 'post',
+			data: {
+				action: 'load_more_blog',
+				'page': page,
+				next: next,
+				termId: termId,
+			},
+			success: function (response) {
+				$('.ajax_blog__grid').append(response);
+				// console.log(wpApiSettings.ajaxUrl);
+				// console.log(response);
+				// Hide the preloader
+				$('.preloader_container').removeClass('loading');
+				if ('' === response) {
+					$('.load-more-btn').hide();
+					return;
+				}
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				console.log(xhr.responseText);
+			}
+		});
+	});
+}
+
+function searchAjaxLoadMore() {
+	// Add event listener to the load more button
+	$('.search-archive-wrapper .load-more-btn').click(function (e) {
+		e.preventDefault();
+		$('.preloader_container').addClass('loading');
+
+		var next = $('.ajax_search__grid .col-lg-4').length + 1;
+		var dataFilter = $('.ajax_search__grid').attr('data-filter');
+		var dataNeighborhoods = $('.ajax_search__grid').attr('data-neighborhoods');
+		var dataBedrooms = $('.ajax_search__grid').attr('data-bedrooms');
+		var dataPrice = $('.ajax_search__grid').attr('data-price');
+		var page = 2;
+
+		$.ajax({
+			url: wpApiSettings.ajaxUrl, // Make sure to define this in your PHP file
+			type: 'post',
+			data: {
+				action: 'load_more_search',
+				'page': page,
+				next: next,
+				dataFilter: dataFilter,
+				neighborhoods: dataNeighborhoods,
+				bedrooms: dataBedrooms,
+				price: dataPrice,
+			},
+			success: function (response) {
+				$('.ajax_search__grid').append(response);
+				// console.log(wpApiSettings.ajaxUrl);
+				// console.log(response);
+				// Hide the preloader
+				$('.preloader_container').removeClass('loading');
+				apartamentCardSlider();
+				if ('' === response || $('.ajax_search__grid .col-lg-4').length % 12 != 0) {
+					$('.load-more-btn').hide();
+					return;
+				}
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				console.log(xhr.responseText);
+			}
+		});
+	});
+}
+
+// load more on scroll for search results page
+function handleIntersection(entries, observer) {
+	entries.forEach(entry => {
+		// If the button is in the viewport
+		if (entry.isIntersecting) {
+			// Trigger a click event on the button
+			const loadMoreBtn = document.querySelector('.search-results .load-more-btn');
+			loadMoreBtn.click();
+		}
+	});
+}
+
+// Create a new Intersection Observer
+const observer = new IntersectionObserver(handleIntersection);
+
+// Target the button you want to observe
+const loadMoreBtn = document.querySelector('.search-results .load-more-btn');
+
+// Start observing the button
+if (loadMoreBtn && $('.search-results')) {
+	observer.observe(loadMoreBtn);
+}
+
+function taxCollectionsAjaxLoadMore() {
+	// Add event listener to the load more button
+	$('.tax-collections-archive-wrapper .load-more-btn').click(function (e) {
+		e.preventDefault();
+		$('.preloader_container').addClass('loading');
+
+		var next = $('.tax_collection_grid .col-lg-4').length + 1;
+		var dataTerm = $('.tax_collection_grid').attr('data-term');
+		var page = 2;
+
+		$.ajax({
+			url: wpApiSettings.ajaxUrl, // Make sure to define this in your PHP file
+			type: 'post',
+			data: {
+				action: 'load_more_tax_collections',
+				'page': page,
+				next: next,
+				dataTerm: dataTerm,
+			},
+			success: function (response) {
+				$('.tax_collection_grid').append(response);
+				// console.log(wpApiSettings.ajaxUrl);
+				// console.log(response);
+				// Hide the preloader
+				$('.preloader_container').removeClass('loading');
+				apartamentCardSlider();
+				if ('' === response || $('.tax_collection_grid > div').length % 12 != 0) {
+					$('.load-more-btn').hide();
+					return;
+				}
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				console.log(xhr.responseText);
+			}
+		});
+	});
+}
+
+function taxNeighborhoodsAjaxLoadMore() {
+	// Add event listener to the load more button
+	$('.tax-neighborhoods-archive-wrapper .load-more-btn').click(function (e) {
+		e.preventDefault();
+		$('.preloader_container').addClass('loading');
+
+		var next = $('.tax_neighborhood_grid .col-lg-4').length + 1;
+		var dataTerm = $('.tax_neighborhood_grid').attr('data-term');
+		var page = 2;
+
+		$.ajax({
+			url: wpApiSettings.ajaxUrl, // Make sure to define this in your PHP file
+			type: 'post',
+			data: {
+				action: 'load_more_tax_neighborhoods',
+				'page': page,
+				next: next,
+				dataTerm: dataTerm,
+			},
+			success: function (response) {
+				$('.tax_neighborhood_grid').append(response);
+				// console.log(wpApiSettings.ajaxUrl);
+				// console.log(response);
+				// Hide the preloader
+				$('.preloader_container').removeClass('loading');
+				apartamentCardSlider();
+				if ('' === response || $('.tax_neighborhood_grid > div').length % 12 != 0) {
+					$('.load-more-btn').hide();
+					return;
+				}
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				console.log(xhr.responseText);
+			}
 		});
 	});
 }
@@ -1512,29 +1702,31 @@ function edit_user_page() {
 
 
 	$(window).on('scroll', function () {
-		var $settings_main = $('.settings_main');
-		var $edit_listing_footer = $('.edit_listing_form--footer');
-
 		var $footer_elem = $('.admin-footer');
-		var windowHeight = $(window).height();
-		var scrollTop = $(window).scrollTop();
-		var footerOffsetTop = $footer_elem.offset().top;
-		// var elemOffsetTop = $settings_main.offset().top;
-		// var elemHeight = $settings_main.outerHeight();
+		if ($footer_elem.length) {
+			var $settings_main = $('.settings_main');
+			var $edit_listing_footer = $('.edit_listing_form--footer');
 
-		// var elemInView = (scrollTop + windowHeight) > (elemOffsetTop + elemHeight/2);
+			var windowHeight = $(window).height();
+			var scrollTop = $(window).scrollTop();
+			var footerOffsetTop = $footer_elem.offset().top;
+			// var elemOffsetTop = $settings_main.offset().top;
+			// var elemHeight = $settings_main.outerHeight();
 
-		// if (elemInView) {
-		if (footerOffsetTop - scrollTop - 20 <= windowHeight) {
-			$settings_main.addClass('not_fixed_btn');
-		} else {
-			$settings_main.removeClass('not_fixed_btn');
-		}
+			// var elemInView = (scrollTop + windowHeight) > (elemOffsetTop + elemHeight/2);
 
-		if (footerOffsetTop - scrollTop - 20 <= windowHeight) {
-			$edit_listing_footer.addClass('not_fixed');
-		} else {
-			$edit_listing_footer.removeClass('not_fixed');
+			// if (elemInView) {
+			if (footerOffsetTop - scrollTop - 20 <= windowHeight) {
+				$settings_main.addClass('not_fixed_btn');
+			} else {
+				$settings_main.removeClass('not_fixed_btn');
+			}
+
+			if (footerOffsetTop - scrollTop - 20 <= windowHeight) {
+				$edit_listing_footer.addClass('not_fixed');
+			} else {
+				$edit_listing_footer.removeClass('not_fixed');
+			}
 		}
 	});
 
@@ -1576,7 +1768,7 @@ function datepicker() {
 // other scripts
 function submit_application() {
 	if ($('.simpay-checkout-form').length) {
-		$('.simpay-form-control').each(function(){
+		$('.simpay-form-control').each(function () {
 			var label = $(this).find('label');
 			var label_txt = label.text();
 			var new_label = label_txt.replace(/\s+/g, ' ').trim();
@@ -1585,4 +1777,203 @@ function submit_application() {
 		})
 	}
 }
+
+
+// ------------------------------------------------------------------
+
+document.querySelectorAll('.features_slider').forEach(slider => {
+	const swiper = new Swiper(slider, {
+		// loopedSlides: 8,
+		loop: true,
+		// freeMode: true,
+		// mousewheel: {
+		// 	releaseOnEdges: false,
+		// },
+		autoplay: {
+			delay: 2500,
+			disableOnInteraction: false,
+		},
+		// watchSlidesProgress: true,
+		spaceBetween: 15,
+		slidesPerView: "auto",
+		centeredSlides: true,
+		pagination: {
+			el: slider.querySelector('.swiper-pagination'),
+			clickable: true,
+		},
+		on: {
+			// lazy load images
+			slideChange: function () {
+				try {
+					lazyLoadInstance.update();
+				} catch (e) {
+				}
+			}
+		},
+		breakpoints: {
+			640: {
+				spaceBetween: 30,
+				// slidesPerView: 2,
+				// centeredSlides: true,
+			},
+			// 768: {
+			// 	slidesPerView: 3,
+			// 	centeredSlides: true,
+			// },
+			// 1024: {
+			// 	slidesPerView: 4,
+			// 	centeredSlides: true,
+			// },
+			// 1199: {
+			// 	slidesPerView: 5,
+			// 	centeredSlides: true,
+			// },
+		},
+	});
+	$('.features_slider').on('mouseenter', function (e) {
+		swiper.autoplay.stop();
+	})
+	$('.features_slider').on('mouseleave', function (e) {
+		swiper.autoplay.start();
+	})
+});
+
+document.querySelectorAll('.testimonials_slider').forEach(slider => {
+	const swiper = new Swiper(slider, {
+		// loopedSlides: 8,
+		loop: true,
+		// freeMode: true,
+		// mousewheel: {
+		// 	releaseOnEdges: false,
+		// },
+		spaceBetween: 15,
+		slidesPerView: "auto",
+		centeredSlides: true,
+		autoplay: {
+			delay: 5000,
+			disableOnInteraction: false,
+		},
+		// watchSlidesProgress: true,
+		pagination: {
+			el: slider.querySelector('.swiper-pagination'),
+			clickable: true,
+		},
+		on: {
+			// lazy load images
+			slideChange: function () {
+				try {
+					lazyLoadInstance.update();
+				} catch (e) {
+				}
+			}
+		},
+		breakpoints: {
+			640: {
+				slidesPerView: 2,
+				centeredSlides: false,
+				spaceBetween: 30,
+			},
+			768: {
+				slidesPerView: 3,
+				centeredSlides: false,
+			},
+			1200: {
+				slidesPerView: 4,
+				centeredSlides: false,
+			},
+		},
+	});
+});
+
+
+function apartamentCardSlider() {
+
+	document.querySelectorAll('.new_appartament__item__slider').forEach(slider => {
+
+		const slides = slider.querySelectorAll('.slide');
+		const btnLeft = slider.querySelector('.slider__btn--left');
+		const btnRight = slider.querySelector('.slider__btn--right');
+		const dotContainer = slider.querySelector('.dots');
+
+		let curSlide = 0;
+		const maxSlide = slides.length;
+
+		// Functions
+		const createDots = function () {
+			dotContainer.innerHTML = '';
+			slides.forEach(function (_, i) {
+				dotContainer.insertAdjacentHTML(
+					'beforeend',
+					`<span class="swiper-pagination-bullet" data-slide="${i}"></span>`
+				);
+			});
+		};
+
+		const activateDot = function (slide) {
+			slider
+				.querySelectorAll('.swiper-pagination-bullet')
+				.forEach(dot => dot.classList.remove('swiper-pagination-bullet-active'));
+
+			slider
+				.querySelector(`.swiper-pagination-bullet[data-slide="${slide}"]`)
+				.classList.add('swiper-pagination-bullet-active');
+		};
+
+		const goToSlide = function (slide) {
+			slides.forEach(
+				(s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+			);
+		};
+
+		// Next slide
+		const nextSlide = function () {
+			if (curSlide === maxSlide - 1) {
+				curSlide = 0;
+			} else {
+				curSlide++;
+			}
+
+			goToSlide(curSlide);
+			activateDot(curSlide);
+		};
+
+		const prevSlide = function () {
+			if (curSlide === 0) {
+				curSlide = maxSlide - 1;
+			} else {
+				curSlide--;
+			}
+			goToSlide(curSlide);
+			activateDot(curSlide);
+		};
+
+		const init = function () {
+			goToSlide(0);
+			createDots();
+
+			activateDot(0);
+		};
+		init();
+
+		// Event handlers
+		btnRight.addEventListener('click', nextSlide);
+		btnLeft.addEventListener('click', prevSlide);
+
+		document.addEventListener('keydown', function (e) {
+			if (e.key === 'ArrowLeft') prevSlide();
+			e.key === 'ArrowRight' && nextSlide();
+		});
+
+		dotContainer.addEventListener('click', function (e) {
+			if (e.target.classList.contains('swiper-pagination-bullet')) {
+				const {slide} = e.target.dataset;
+				goToSlide(slide);
+				activateDot(slide);
+			}
+		});
+
+	});
+
+}
+
 

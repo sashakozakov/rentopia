@@ -15,7 +15,7 @@ get_header();
 
 <?php get_template_part( 'template-parts/breadcrumbs' ); ?>
 
-	<div class="archive-wrapper pt-0">
+    <div class="archive-wrapper pt-0 tax-collections-archive-wrapper">
 
 		<?php
 
@@ -26,72 +26,87 @@ get_header();
 		$image            = get_field( 'image', $term_id_prefixed );
 		?>
 
-		<section class="search_banner mb-5">
-			<div class="container">
-				<div class="text-lg text-center mb-5">
+        <section class="search_banner mb-5">
+            <div class="container">
+                <div class="text-lg text-center mb-5">
 					<?php if ( $image ) : ?>
-						<div class="search_banner__mask mb-4">
-							<div>
+                        <div class="search_banner__mask mb-4">
+                            <div>
 								<?php echo wp_get_attachment_image( $image, 'full' ); ?>
-							</div>
-						</div>
+                            </div>
+                        </div>
 					<?php endif; ?>
-					<h1 class="h3">
+                    <h1 class="h3">
 						<?php echo $term->name; ?>
-					</h1>
-				</div>
+                    </h1>
+                </div>
 
 
 				<?php get_template_part( 'template-parts/builder/components/search_banner_form' ); ?>
-			</div>
-		</section>
+            </div>
+        </section>
 
 
-		<div class="container">
+        <div class="container">
 
-			<?php if ( have_posts() ): ?>
-				<div class="row appartaments__grid">
+			<?php
+			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+			$args  = array(
+				'posts_per_page' => 12,
+				'post_type'      => 'apartment',
+				'paged'          => $paged,
+				'post_status'    => 'publish',
+				'tax_query'      => array(
+					array(
+						'taxonomy' => 'collections',
+						'field'    => 'term_id',
+						'terms'    => $term_id,
+					),
+				),
+			);
+			$query = new WP_Query( $args );
+			if ( $query->have_posts() ): ?>
+                <div class="row appartaments__grid tax_collection_grid" data-term="<?php echo $term_id; ?>">
 					<?php
-					$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-					while ( have_posts() ): the_post(); ?>
-						<div class="col-lg-4 col-md-6">
-							<?php get_template_part( 'template-parts/builder/components/appartament_item' ); ?>
-						</div>
+					$count = $query->post_count;
+					while ( $query->have_posts() ): $query->the_post(); ?>
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+							<?php get_template_part( 'template-parts/builder/components/new_appartament_item' ); ?>
+                        </div>
 					<?php endwhile; ?>
-				</div>
+                </div>
 				<?php
 				wp_reset_postdata();
 			else: ?>
 
-				<div class="row">
-					<div class="col-lg-6">
+                <div class="row">
+                    <div class="col-12">
 						<?php get_template_part( 'template-parts/content-none' ); ?>
-					</div>
-				</div>
+                    </div>
+                </div>
 			<?php endif; ?>
 
-			<div class="pagination">
-				<?php echo paginate_links( array(
-					'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-					'total'        => $wp_query->max_num_pages,
-					'current'      => max( 1, get_query_var( 'paged' ) ),
-					'format'       => '?paged=%#%',
-					'show_all'     => false,
-					'type'         => 'list',
-					'end_size'     => 2,
-					'mid_size'     => 1,
-					'prev_next'    => true,
-					'prev_text'    => __( 'Previous', '_it_start' ),
-					'next_text'    => __( 'Next', '_it_start' ),
-					'add_args'     => false,
-					'add_fragment' => '',
-				) ); ?>
 
-			</div>
+			<?php
+			if ( $count >= 12 ) {
+				$wrapper = 'text-center mt-5 pt-3 preloader_container';
+				$title   = __( 'Load more Buildings', 'rentopia' );;
+				$class  = 'load-more-btn btn btn-outline btn-md';
+				$url    = "#";
+				$target = false;
+				get_template_part( 'template-parts/components/button', null, [
+					'classes' => $class,
+					'title'   => $title,
+					'url'     => $url,
+					'target'  => $target,
+					'wrapper' => $wrapper
+				] );
+			}
+			?>
 
 
-		</div>
-	</div>
+        </div>
+    </div>
 
 <?php
 get_footer();

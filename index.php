@@ -22,18 +22,18 @@ get_header();
 
 $index = 1;
 // loop over the ACF flexible fields of this page / post
-if ( !is_archive() ) {
+if ( ! is_archive() ) {
 	while ( the_flexible_field( 'builder', get_option( 'page_for_posts' ) ) ) {
 		// load the layout from sub folder
 		get_template_part( 'template-parts/builder/' . get_row_layout(), null, [ 'index' => $index ] );
 		$index ++;
 	}
-}  
+}
 ?>
 
 
-	<div class="archive-wrapper pt-0">
-		<div class="container">
+    <div class="archive-wrapper blog-archive-wrapper pt-0">
+        <div class="container">
 
 			<?php
 			$categories = get_categories( array(
@@ -42,68 +42,84 @@ if ( !is_archive() ) {
 			) ); ?>
 
 			<?php if ( $categories ): ?>
-				<ul class="blog_categories text-md">
-					<li class="<?php echo ! is_front_page() && is_home() ? 'current-cat' : ''; ?>">
-						<a href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>">
+                <ul class="blog_categories text-md">
+                    <li class="<?php echo ! is_front_page() && is_home() ? 'current-cat' : ''; ?>">
+                        <a href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>">
 							<?php _e( 'All', '_it_start' ); ?>
-						</a>
-					</li>
+                        </a>
+                    </li>
 					<?php wp_list_categories( array(
 						'title_li' => ''
 					) ); ?>
-				</ul>
+                </ul>
 
 
 			<?php endif; ?>
 
-			<?php if ( have_posts() ) : ?>
+			<?php
+			$categories  = get_the_category();
+			$category_id = $categories[0]->cat_ID;
+			$paged       = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+			$args        = array(
+				'post_type'      => 'post',
+				'posts_per_page' => 4,
+				'order'          => 'DESC',
+				'post_status'    => 'publish',
+				'paged'          => $paged,
+			);
+			if ( is_category() ) {
+				$args['tax_query'] = array(
+					array(
+						'taxonomy' => 'category',
+						'field'    => 'id',
+						'terms'    => $category_id
+					),
+				);
+			}
+			$query = new WP_Query( $args );
+			if ( $query->have_posts() ) : ?>
 
-				<div class="row">
+                <div class="row ajax_blog__grid" data-term="<?php echo $category_id; ?>">
 					<?php
 					$i     = 1;
-					$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-					while ( have_posts() ) : the_post(); ?>
-
-						<div class="<?php echo $i == 1 && $paged == 1 ? 'col-lg-12' : 'col-lg-4'; ?>">
-							<?php get_template_part( 'template-parts/article', null, [ 'item'  => $i,
-																					   'paged' => $paged
-							] ); ?>
-						</div>
-
+					$count = $query->post_count;
+					while ( $query->have_posts() ) : $query->the_post(); ?>
+						<?php get_template_part( 'template-parts/article', null, [
+							'item'  => $i,
+							'paged' => $paged
+						] ); ?>
 						<?php $i ++; endwhile; ?>
-				</div>
-				<!--				--><?php //get_template_part( 'template-parts/pagination' ); ?>
-				<div class="pagination">
-					<?php echo paginate_links( array(
-						'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-						'total'        => $wp_query->max_num_pages,
-						'current'      => max( 1, get_query_var( 'paged' ) ),
-						'format'       => '?paged=%#%',
-						'show_all'     => false,
-						'type'         => 'list',
-						'end_size'     => 2,
-						'mid_size'     => 1,
-						'prev_next'    => true,
-						'prev_text'    => __( 'Previous', '_it_start' ),
-						'next_text'    => __( 'Next', '_it_start' ),
-						'add_args'     => false,
-						'add_fragment' => '',
-					) ); ?>
+                </div>
 
-				</div>
+				<?php
+				if ( $count >= 4 ) {
+					$wrapper = 'text-center mt-5 pt-3 preloader_container';
+					$title   = __( 'Load more', 'rentopia' );;
+					$class  = 'load-more-btn btn btn-outline btn-md';
+					$url    = "#";
+					$target = false;
+					get_template_part( 'template-parts/components/button', null, [
+						'classes' => $class,
+						'title'   => $title,
+						'url'     => $url,
+						'target'  => $target,
+						'wrapper' => $wrapper
+					] );
+				}
+				?>
 
 			<?php else: ?>
 
-				<div class="row">
-					<div class="col-lg-6">
+                <div class="row">
+                    <div class="col-12 text-center">
 						<?php get_template_part( 'template-parts/content-none' ); ?>
-					</div>
-				</div>
+                    </div>
+                </div>
 
 			<?php endif; ?>
 
-		</div>
-	</div>
+        </div>
+    </div>
 
 <?php
 get_footer();

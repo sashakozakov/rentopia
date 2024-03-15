@@ -1,23 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 // Colors -------------------------------------------
-$primary: #01ccad;
+$primary: #B8C83F; //#01ccad;
+$light_primary: #DAED4C;
 $light: #fffdfa;
 $grey: #9f9a93;
-$b: #2a2f38;
+$b: #181B08; //#2a2f38;
 $hr: #E7E3E2;
 $purple: #F67282;
-$active: #01CCAD;
-$active_bg: rgba($active, .2);
+$active: darken($primary, 20);//#01CCAD;
+$active_bg: $light_primary;//rgba($active, .2);
 $no_active: #FB4E63;
 $no_active_bg: rgba($no_active, .2);
 $draft: #FDB600;
 $draft_bg: rgba($draft, .2);
 $color-text: $b;
+$dark: #555D1B;
 
 
 
-$primary-hover: darken($primary, 10%);
+$primary-hover: #7E8A2A; //darken($primary, 10%);
 $secondary: #38bdf8;
 $secondary-hover: darken($secondary, 8%);
 
@@ -26,6 +28,7 @@ $white-50: rgba($w, 0.5);
 $grey: #bdbdbd;
 $grey-border: #d0d0d0;
 $red: #FB4E63;
+$body_bg: #F8F9F6;
 
 $green: #6dc22e;
 $orange: #f56e28;
@@ -39,7 +42,7 @@ $color-link-hover: $primary-hover;
 
 // Fonts -------------------------------------------
 $font-text: "Inter", "Arial", sans-serif;
-$font-heading: "Albra", "Arial", sans-serif;
+$font-heading: "Belgiano Serif", "Albra", "Arial", sans-serif;
 
 $font-code: "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
 $font-pre: "Courier 10 Pitch", "Courier", monospace;

@@ -1,3 +1,10 @@
+section {
+	&:first-of-type{
+		&.content_module {
+			margin-top: rem(130);
+		}
+	}
+}
 .content_module {
 	margin-top: clamp-rem(40, 130, 575, 1200);
 	margin-bottom: 46px;

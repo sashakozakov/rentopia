@@ -12,6 +12,7 @@ the_post();
 		<section class="buildings_section">
 			<div class="container">
 
+				<?php /*
 				<form action="<?php echo esc_url( home_url() ); ?>" id="searchform" role="search"
 					  class="buildings_search_form">
 					<input type="text" id="s" name="s" placeholder="<?php _e( 'Search Building...', '_it_start' ); ?>">
@@ -26,6 +27,7 @@ the_post();
 					</button>
 					<input type="hidden" name="post_type" value="building"/>
 				</form>
+ */ ?>
 
 				<?php
 				$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
@@ -34,6 +36,7 @@ the_post();
 					'posts_per_page' => 12,
 					'order'          => 'ASC',
 					'orderby'        => 'meta_value_num',
+					'post_status'    => 'publish',
 					'paged'          => $paged,
 					'meta_query'     => array(
 						'relation' => 'OR',
@@ -61,6 +64,7 @@ the_post();
 					</div>
 				<?php endif; ?>
 
+				<?php /* ?>
 				<div class="pagination">
 					<?php echo paginate_links( array(
 						'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
@@ -77,24 +81,24 @@ the_post();
 						'add_args'     => false,
 						'add_fragment' => '',
 					) ); ?>
-
 				</div>
+ */ ?>
 
 				<?php
-//				if ( $count >= 6 ) {
-//					$wrapper = 'text-center mt-5 pt-3 preloader_container';
-//					$title   = __( 'Load more Buildings', '_it_start' );;
-//					$class  = 'load-more-btn btn btn-outline btn-md';
-//					$url    = "#";
-//					$target = false;
-//					get_template_part( 'template-parts/components/button', null, [
-//						'classes' => $class,
-//						'title'   => $title,
-//						'url'     => $url,
-//						'target'  => $target,
-//						'wrapper' => $wrapper
-//					] );
-//				}
+				if ( $count >= 12 ) {
+					$wrapper = 'text-center mt-5 pt-3 preloader_container';
+					$title   = __( 'Load more Buildings', 'rentopia' );;
+					$class  = 'load-more-btn btn btn-outline btn-md';
+					$url    = "#";
+					$target = false;
+					get_template_part( 'template-parts/components/button', null, [
+						'classes' => $class,
+						'title'   => $title,
+						'url'     => $url,
+						'target'  => $target,
+						'wrapper' => $wrapper
+					] );
+				}
 				?>
 			</div>
 		</section>

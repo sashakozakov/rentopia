@@ -202,7 +202,6 @@
 	}
 }
 
-
 .admin-footer {
 	background: $b;
 	line-height: 1;
@@ -251,6 +250,186 @@
 
 		&:hover {
 			color: $primary;
+		}
+	}
+}
+
+.new_footer {
+	flex-shrink: 0;
+	width: 100%;
+	position: relative;
+
+	&:before {
+		position: absolute;
+		content: '';
+		top: 0;
+		bottom: 0;
+		right: 0;
+		background: $w;
+		border-radius: 73px 0 0 0;
+		width: 100%;
+		@include min(md) {
+			width: 58%;
+		}
+	}
+
+	.container {
+		position: relative;
+	}
+
+	&__right {
+		padding-top: rem(59);
+		padding-bottom: rem(49);
+
+		form {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			column-gap: rem(10);
+			@include min(md) {
+				max-width: rem(464);
+			}
+
+			> label {
+				width: 100%;
+				margin-bottom: 5px;
+
+				.wpcf7-form-control-wrap {
+					margin-bottom: 0;
+				}
+
+				&:nth-child(2),
+				&:nth-child(3) {
+					@include min(481) {
+						width: calc(50% - 5px);
+					}
+				}
+			}
+
+			input[type="text"],
+			input[type="email"],
+			textarea {
+				border-radius: 0;
+				height: 42px;
+				border: none;
+				border-bottom: 1px solid $b;
+				padding-left: 0;
+				padding-right: 0;
+				font-weight: 500;
+				display: block;
+				background: $w;
+			}
+
+			textarea {
+				resize: none;
+				height: rem(89);
+			}
+
+			> .wpcf7-form-control-wrap {
+				display: block;
+				width: 100%;
+				font-size: 13px;
+
+				label {
+					align-items: center;
+				}
+
+				input[type=checkbox] {
+					width: 12px;
+					height: 12px;
+					border: 1px solid $b;
+					border-radius: 2px;
+				}
+			}
+
+			.wpcf7-submit {
+				font-size: rem(15);
+				margin-top: rem(16);
+			}
+		}
+	}
+
+	&__copyright {
+		margin-bottom: rem(17);
+		@include min(md) {
+			margin: rem(49 0 17 90);
+		}
+
+		p {
+			display: inline;
+
+			a {
+				color: inherit;
+
+				&:hover {
+					color: $primary;
+				}
+			}
+		}
+	}
+
+	&__left {
+		display: flex;
+		flex-direction: column;
+
+		&--bottom {
+			position: relative;
+			flex: 1 1;
+			padding: rem(30 0);
+			@include min(md) {
+				padding: rem(65 0 62 90);
+			}
+
+			&:before {
+				position: absolute;
+				content: '';
+				background: $primary;
+				top: 0;
+				bottom: 0;
+				right: rem(-18);
+				left: -100%;
+				border-radius: rem(0 73 0 0);
+			}
+
+			.inner_block {
+				position: relative;
+				margin: 0 auto;
+				max-width: rem(250);
+			}
+
+			table {
+				font-size: rem(15);
+				margin-bottom: 0;
+
+				td {
+					line-height: 2.1;
+					padding-top: rem(1);
+					padding-bottom: rem(2);
+
+					&:first-child {
+						font-size: rem(18);
+						font-family: $font-heading;
+					}
+
+					a {
+						color: inherit;
+
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	&__logo {
+		display: block;
+		width: 100%;
+		margin-bottom: rem(13);
+
+		img {
+			width: 100%;
 		}
 	}
 }

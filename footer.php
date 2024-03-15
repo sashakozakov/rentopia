@@ -8,64 +8,89 @@
  *
  * @package _it_start
  */
-$logo = get_field('footer_logo', 'option');
-$enable_to_top = get_field('enable_to_top', 'option');
+$logo              = get_field( 'footer_logo', 'option' );
+$footer_form_title = get_field( 'footer_form_title', 'option' );
+$footer_form       = get_field( 'footer_form', 'option' );
+$phone             = get_field( 'phone', 'option' );
+$email             = get_field( 'email', 'option' );
+$address           = get_field( 'address', 'option' );
+$enable_to_top     = get_field( 'enable_to_top', 'option' );
 ?>
 
 </main><!-- /.site-content -->
 
-<footer class="footer">
+<footer class="new_footer">
 	<div class="container">
-		<div class="footer__top">
-			<?php if ($logo) : ?>
-				<div class="footer__top--logo">
-					<a href="<?php echo home_url(); ?>" class="site-logo" rel="home">
-						<?php echo wp_get_attachment_image($logo, 'full'); ?>
-					</a>
+
+		<div class="row flex-md-row-reverse">
+			<?php if ( $footer_form ) : ?>
+				<div class="col-md-6 offset-lg-1 new_footer__right">
+					<?php if ( $footer_form_title ): ?>
+						<h3>
+							<?php echo $footer_form_title; ?>
+						</h3>
+					<?php endif; ?>
+					<?php echo do_shortcode( '[contact-form-7 id="' . $footer_form . '" title="Footer Form"]' ); ?>
 				</div>
 			<?php endif; ?>
+			<div class="col-lg-5 col-md-6 new_footer__left">
+				<div class="new_footer__copyright text-sm text-center">
+					<span>
+						&copy; <?php echo date( 'Y' ) ?>
+						<?php the_field( 'copyright_text', 'option' ); ?>
+					</span>
+				</div>
+				<div class="new_footer__left--bottom">
+					<div class="inner_block">
+						<?php if ( $logo ) : ?>
+							<div class="new_footer__logo">
+								<a href="<?php echo home_url(); ?>" class="site-logo" rel="home">
+									<?php echo wp_get_attachment_image( $logo, 'full' ); ?>
+								</a>
+							</div>
+						<?php endif; ?>
 
-			<?php wp_nav_menu(array(
-				'theme_location' => 'footer',
-				'container_class' => 'footer-links__container',
-				'menu_class' => 'footer-links',
-				'fallback_cb' => false
-			)); ?>
-
-			<?php if (is_active_sidebar('footer-1')): ?>
-				<aside class="footer__top--sidebar sidebar_1 widget-area">
-					<?php dynamic_sidebar('footer-1'); ?>
-				</aside>
-			<?php endif; ?>
-			<?php if (is_active_sidebar('footer-2')): ?>
-				<aside class="footer__top--sidebar sidebar_2 widget-area visible-sm-up">
-					<?php dynamic_sidebar('footer-2'); ?>
-				</aside>
-			<?php endif; ?>
-			<?php if (is_active_sidebar('footer-3')): ?>
-				<aside class="footer__top--sidebar sidebar_3 widget-area visible-sm-up">
-					<?php dynamic_sidebar('footer-3'); ?>
-				</aside>
-			<?php endif; ?>
-
-
-			<?php get_template_part('template-parts/socials'); ?>
+						<?php if ( $phone ): ?>
+							<table>
+								<?php if ( $phone ): ?>
+									<tr>
+										<td><?php _e( 'Phone', '_it_start' ); ?></td>
+										<td>
+											<a href="tel:<?php echo it_phone_cleaner($phone); ?>">
+												<?php echo $phone; ?>
+											</a>
+										</td>
+									</tr>
+								<?php endif; ?>
+								<?php if ( $email ): ?>
+									<tr>
+										<td><?php _e( 'Email', '_it_start' ); ?></td>
+										<td>
+											<a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
+										</td>
+									</tr>
+								<?php endif; ?>
+								<?php if ( $address ): ?>
+									<tr>
+										<td><?php _e( 'Address', '_it_start' ); ?></td>
+										<td><?php echo $address; ?></td>
+									</tr>
+								<?php endif; ?>
+							</table>
+						<?php endif; ?>
+					</div>
+				</div>
+			</div>
 		</div>
+
+
 	</div>
 
-	<div class="footer__copyright text-sm">
-		<div class="container text-center">
-			<span>
-				&copy; <?php echo date('Y') ?>
-				<?php the_field( 'copyright_text', 'option' ); ?>
-			</span>
-		</div>
-	</div>
 </footer>
 
-<?php get_template_part('template-parts/svg'); ?>
+<?php get_template_part( 'template-parts/svg' ); ?>
 
-<?php if (($enable_to_top && !is_404()) || is_single()) : ?>
+<?php if ( ( $enable_to_top && ! is_404() ) || is_single() ) : ?>
 	<a id="to-top" href="#top">
 		<svg>
 			<use xlink:href="#angle-up"></use>

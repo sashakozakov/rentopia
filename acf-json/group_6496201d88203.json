@@ -84,59 +84,6 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
-        },
-        {
-            "key": "field_64976c895de19",
-            "label": "Apartaments",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_64976c935de1a",
-            "label": "Connected Apartaments",
-            "name": "connected_apartaments",
-            "aria-label": "",
-            "type": "relationship",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "acfe_save_meta": 0,
-            "post_type": [
-                "apartment"
-            ],
-            "post_status": [
-                "publish"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search",
-                "taxonomy"
-            ],
-            "return_format": "object",
-            "acfe_bidirectional": {
-                "acfe_bidirectional_enabled": "0"
-            },
-            "min": "",
-            "max": "",
-            "elements": [
-                "featured_image"
-            ]
         }
     ],
     "location": [
@@ -164,5 +111,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1687646509
+    "modified": 1708292387
 }

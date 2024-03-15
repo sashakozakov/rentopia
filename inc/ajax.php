@@ -60,21 +60,32 @@ add_action( 'wp_ajax_nopriv_load_more_portfolio', 'load_more_portfolio' );
 add_action( 'wp_ajax_load_more_portfolio', 'load_more_portfolio' );
 function load_more_portfolio() {
 
-	$next = isset( $_POST['next'] ) ? intval( $_POST['next'] ) : 1;
+	$next   = isset( $_POST['next'] ) ? intval( $_POST['next'] ) : 1;
+	$pageID = isset( $_POST['pageID'] ) ? intval( $_POST['pageID'] ) : 1;
 
 	$args  = array(
 		'post_type'      => 'apartment',
 		'posts_per_page' => 12,
 		'offset'         => $next - 1,
 	);
+	if ($pageID) {
+		$args['meta_query'] = array(
+			'relation' => 'AND',
+			array(
+				'key'     => 'connected_building',
+				'value'   => $pageID,
+				'compare' => 'IN'
+			),
+		);
+	}
 	$query = new WP_Query( $args );
 
 	$html = '';
 	if ( $query->have_posts() ):
 		while ( $query->have_posts() ): $query->the_post();
-			$html .= '<div class="col-lg-4 col-md-6">';
+			$html .= '<div class="col-xl-3 col-lg-4 col-md-6">';
 			ob_start();
-			get_template_part( 'template-parts/builder/components/appartament_item' );
+			get_template_part( 'template-parts/builder/components/new_appartament_item' );
 			$html .= ob_get_clean();
 			$html .= '</div>';
 		endwhile;
@@ -91,6 +102,7 @@ add_action( 'wp_ajax_load_more_buildings', 'load_more_buildings' );
 function load_more_buildings() {
 
 	$next = isset( $_POST['next'] ) ? intval( $_POST['next'] ) : 1;
+//	$next = $_POST['next'];
 
 	$args  = array(
 		'post_type'      => 'building',
@@ -98,6 +110,7 @@ function load_more_buildings() {
 		'offset'         => $next - 1,
 		'order'          => 'DESC',
 		'orderby'        => 'meta_value_num',
+		'post_status'    => 'publish',
 		'meta_query'     => array(
 			'relation' => 'OR',
 			array(
@@ -115,9 +128,222 @@ function load_more_buildings() {
 	$html = '';
 	if ( $query->have_posts() ):
 		while ( $query->have_posts() ): $query->the_post();
-				ob_start();
-				get_template_part( 'template-parts/components/buildings_loop' );
-				$html .= ob_get_clean();
+			ob_start();
+			get_template_part( 'template-parts/components/buildings_loop' );
+			$html .= ob_get_clean();
+		endwhile;
+		wp_reset_postdata();
+	endif;
+
+	echo $html;
+	wp_die();
+}
+
+
+add_action( 'wp_ajax_nopriv_load_more_blog', 'load_more_blog' );
+add_action( 'wp_ajax_load_more_blog', 'load_more_blog' );
+function load_more_blog() {
+
+	$next        = isset( $_POST['next'] ) ? intval( $_POST['next'] ) : 1;
+	$category_id = isset( $_POST['termId'] ) ? intval( $_POST['termId'] ) : 1;
+
+	$args = array(
+		'post_type'      => 'post',
+		'posts_per_page' => 9,
+		'order'          => 'DESC',
+		'offset'         => $next - 1,
+		'post_status'    => 'publish',
+	);
+	if ( $category_id ) {
+		$args['tax_query'] = array(
+			array(
+				'taxonomy' => 'category',
+				'field'    => 'id',
+				'terms'    => $category_id
+			),
+		);
+	}
+	$query = new WP_Query( $args );
+
+	$html = '';
+	if ( $query->have_posts() ):
+		while ( $query->have_posts() ): $query->the_post();
+			ob_start();
+			get_template_part( 'template-parts/article' );
+			$html .= ob_get_clean();
+		endwhile;
+		wp_reset_postdata();
+	endif;
+
+	echo $html;
+	wp_die();
+}
+
+
+// load more on search page
+add_action( 'wp_ajax_nopriv_load_more_search', 'load_more_search' );
+add_action( 'wp_ajax_load_more_search', 'load_more_search' );
+function load_more_search() {
+
+	$next          = isset( $_POST['next'] ) ? intval( $_POST['next'] ) : 1;
+	$filtersearch  = $_POST['dataFilter'] ? $_POST['dataFilter'] : null;
+	$neighborhoods = $_POST['neighborhoods'] ? $_POST['neighborhoods'] : null;
+	$bedrooms      = $_POST['bedrooms'] ? $_POST['bedrooms'] : null;
+	$price         = $_POST['price'] ? $_POST['price'] : null;
+	if ( $price ) {
+		$price = array_map( 'intval', explode( '-', $price ) );
+	}
+	if ( $neighborhoods ) {
+		$neighborhoods = array_map( 'trim', explode( ',', $neighborhoods ) );
+	}
+	if ( $bedrooms ) {
+		$bedrooms = array_map( 'intval', explode( ',', $bedrooms ) );
+	}
+
+	$args = array(
+		'posts_per_page' => 12,
+		'post_type'      => $filtersearch,
+		'order'          => 'DESC',
+		'offset'         => $next - 1,
+		'post_status'    => 'publish',
+	);
+
+
+	if ( $bedrooms && $price ) {
+		$args['meta_query'] = array(
+			'relation' => 'AND',
+			array(
+				'key'      => 'bedrooms',
+				'value'    => $bedrooms,
+				'operator' => 'IN'
+			),
+			array(
+				'key'     => 'price',
+				'value'   => $price,
+				'type'    => 'numeric',
+				'compare' => 'BETWEEN'
+			),
+		);
+	} elseif ( $bedrooms ) {
+
+		$args['meta_query'] = array(
+			'relation' => 'AND',
+			array(
+				'key'      => 'bedrooms',
+				'value'    => $bedrooms,
+				'operator' => 'IN'
+			),
+		);
+	} elseif ( $price ) {
+		$args['meta_query'] = array(
+			'relation' => 'AND',
+			array(
+				'key'     => 'price',
+				'value'   => $price,
+				'type'    => 'numeric',
+				'compare' => 'BETWEEN'
+			),
+		);
+	}
+
+	$query = new WP_Query( $args );
+
+	$html = '';
+	if ( $query->have_posts() ):
+		while ( $query->have_posts() ): $query->the_post();
+			ob_start();
+			?>
+			<div class="col-xl-3 col-md-6 col-lg-4">
+				<?php get_template_part( 'template-parts/builder/components/new_appartament_item' ); ?>
+			</div>
+			<?php $html .= ob_get_clean();
+		endwhile;
+		wp_reset_postdata();
+	endif;
+
+	echo $html;
+	wp_die();
+}
+
+
+// load more on tax collections page
+add_action( 'wp_ajax_nopriv_load_more_tax_collections', 'load_more_tax_collections' );
+add_action( 'wp_ajax_load_more_tax_collections', 'load_more_tax_collections' );
+function load_more_tax_collections() {
+
+	$next    = isset( $_POST['next'] ) ? intval( $_POST['next'] ) : 1;
+	$term_id = $_POST['dataTerm'] ? $_POST['dataTerm'] : null;
+
+	$args = array(
+		'post_type'      => 'apartment',
+		'posts_per_page' => 12,
+		'order'          => 'DESC',
+		'offset'         => $next - 1,
+		'post_status'    => 'publish',
+		'tax_query'      => array(
+			array(
+				'taxonomy' => 'collections',
+				'field'    => 'term_id',
+				'terms'    => $term_id,
+			),
+		),
+	);
+
+
+	$query = new WP_Query( $args );
+
+	$html = '';
+	if ( $query->have_posts() ):
+		while ( $query->have_posts() ): $query->the_post();
+			ob_start();
+			?>
+			<div class="col-xl-3 col-lg-4 col-md-6">
+				<?php get_template_part( 'template-parts/builder/components/new_appartament_item' ); ?>
+			</div>
+			<?php $html .= ob_get_clean();
+		endwhile;
+		wp_reset_postdata();
+	endif;
+
+	echo $html;
+	wp_die();
+}
+
+// load more on tax neighborhoods page
+add_action( 'wp_ajax_nopriv_load_more_tax_neighborhoods', 'load_more_tax_neighborhoods' );
+add_action( 'wp_ajax_load_more_tax_neighborhoods', 'load_more_tax_neighborhoods' );
+function load_more_tax_neighborhoods() {
+
+	$next    = isset( $_POST['next'] ) ? intval( $_POST['next'] ) : 1;
+	$term_id = $_POST['dataTerm'] ? $_POST['dataTerm'] : null;
+
+	$args = array(
+		'post_type'      => 'apartment',
+		'posts_per_page' => 12,
+		'order'          => 'DESC',
+		'offset'         => $next - 1,
+		'post_status'    => 'publish',
+		'tax_query'      => array(
+			array(
+				'taxonomy' => 'neighborhood',
+				'field'    => 'term_id',
+				'terms'    => $term_id,
+			),
+		),
+	);
+
+
+	$query = new WP_Query( $args );
+
+	$html = '';
+	if ( $query->have_posts() ):
+		while ( $query->have_posts() ): $query->the_post();
+			ob_start();
+			?>
+			<div class="col-xl-3 col-lg-4 col-md-6">
+				<?php get_template_part( 'template-parts/builder/components/new_appartament_item' ); ?>
+			</div>
+			<?php $html .= ob_get_clean();
 		endwhile;
 		wp_reset_postdata();
 	endif;

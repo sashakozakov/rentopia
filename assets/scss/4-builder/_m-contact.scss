@@ -1,8 +1,5 @@
 .module_contact {
 	&__inner {
-		border: 1px solid $b;
-		border-bottom: none;
-		background: $light;
 		padding: clamp-rem(27, 75, 575, 767) clamp-rem(30, 15, 575, 767);
 		@include min(lg) {
 			padding: rem(104 15 97);
