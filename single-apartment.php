@@ -16,11 +16,11 @@ if ( $preview ) {
 	$title               = $_GET['title'];
 	$apartment_number    = $_GET['apartment_number'];
 	$price               = $_GET['price'];
+	$new_price           = $_GET['new_price'];
 	$beds                = $_GET['bedrooms'];
 	$bath                = $_GET['bathrooms'];
 	$squares             = $_GET['squares_ft'];
 	$move_in             = $_GET['move_in'];
-	$first_month_free    = $_GET['first_month_free'] ? $_GET['first_month_free'] : get_field( 'first_month_free' );
 	$new_to_market       = $_GET['new_to_market'];
 	$overview_content    = $_GET['overview_content'];
 	$user_agent          = $_GET['user_agent'];
@@ -49,11 +49,11 @@ if ( $preview ) {
 	$title            = get_the_title();
 	$apartment_number = get_field( 'apartment_number' );
 	$price            = get_field( 'price' );
+	$new_price        = get_field( 'new_price' );
 	$beds             = get_field( 'bedrooms' );
 	$bath             = get_field( 'bathrooms' );
 	$squares          = get_field( 'squares_ft' );
 	$move_in          = get_field( 'move_in' );
-	$first_month_free = get_field( 'first_month_free' );
 	$new_to_market    = get_field( 'new_to_market' );
 	$overview_content = get_field( 'overview_content' );
 	$user_agent       = get_field( 'user_agent' );
@@ -178,7 +178,7 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 			</p>
 			<h1 class="single_appartament__banner--title h3">
 				<?php echo $title; ?>
-				<?php echo $apartment_number?>
+				<?php echo $apartment_number ?>
 			</h1>
 			<span class="d-block single_appartament__banner--id visible-md-up">
 				ID#
@@ -192,11 +192,20 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 	<section class="nav_grid_container">
 		<div class="container">
 			<div class="d-flex flex-wrap nav_grid">
-				<?php if ( $price ):
-					$price = number_format($price, 0, '.', ',');
+				<?php if ( $new_price ):
+					$new_price = number_format( $new_price, 0, '.', ',' ); ?>
+					<div class="nav_grid--elem price_block">
+						$
+						<span><?php echo $new_price; ?></span>
+						/<?php _e( 'month', '_it_start' ); ?>
+					</div>
+				<?php elseif ( $price ):
+					$price = number_format( $price, 0, '.', ',' );
 					?>
 					<div class="nav_grid--elem price_block">
-						$<span><?php echo $price; ?></span>/<?php _e( 'month', '_it_start' ); ?>
+						$
+						<span><?php echo $price; ?></span>
+						/<?php _e( 'month', '_it_start' ); ?>
 					</div>
 				<?php endif; ?>
 				<?php if ( $beds ): ?>
@@ -234,15 +243,15 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 							<?php echo $newDate; ?>
 						</span>
 						<span class="hidden-md-up">
-						<?php echo $newDate; // output: Sep 30
-						?>
+							<?php echo $newDate; // output: Sep 30
+							?>
 						</span>
 
 					</div>
 				<?php endif; ?>
 
 				<div class="nav_grid__tabs visible-md-up">
-					<?php if ( $overview_content || $new_to_market || $first_month_free ): ?>
+					<?php if ( $overview_content || $new_to_market ): ?>
 						<a href="#description"><?php _e( 'Description', '_it_start' ); ?></a>
 					<?php endif; ?>
 					<?php if ( $building_terms || $apartment_terms || $collections_terms ): ?>
@@ -260,7 +269,7 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 
 
 			<div class="nav_grid__tabs hidden-md-up">
-				<?php if ( $overview_content || $new_to_market || $first_month_free ): ?>
+				<?php if ( $overview_content || $new_to_market ): ?>
 					<a href="#description"><?php _e( 'Description', '_it_start' ); ?></a>
 				<?php endif; ?>
 				<?php if ( $building_terms || $apartment_terms || $collections_terms ): ?>
@@ -304,8 +313,8 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 													</div>
 												<?php endif; ?>
 												<span>
-												<?php echo $term->name; ?>
-											</span>
+													<?php echo $term->name; ?>
+												</span>
 											</li>
 										<?php } ?>
 									</ul>
@@ -329,8 +338,8 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 													</div>
 												<?php endif; ?>
 												<span>
-												<?php echo $term->name; ?>
-											</span>
+													<?php echo $term->name; ?>
+												</span>
 											</li>
 										<?php } ?>
 									</ul>
@@ -356,12 +365,12 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 										<a href="<?php echo get_term_link( $term ) ?>">
 											<?php if ( $icon ) : ?>
 												<span class="icon_block">
-											<?php echo wp_get_attachment_image( $icon, 'full' ); ?>
-										</span>
+													<?php echo wp_get_attachment_image( $icon, 'full' ); ?>
+												</span>
 											<?php endif; ?>
 											<span class="d-block">
-									<?php echo $term->name; ?>
-									</span>
+												<?php echo $term->name; ?>
+											</span>
 										</a>
 									</h6>
 								<?php } ?>
@@ -379,20 +388,15 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 						'preview_agent_id' => $user_agent
 					] ); ?>
 
-					<?php if ( $overview_content || $new_to_market || $first_month_free ): ?>
+					<?php if ( $overview_content || $new_to_market ): ?>
 						<div class="overview">
 							<div class="anchor" id="description"></div>
 							<h4>
 								<?php _e( 'Description', '_it_start' ); ?>
 							</h4>
-							<?php if ( $first_month_free || $new_to_market ): ?>
+							<?php if ( $new_to_market ): ?>
 								<div class="labels_block">
-									<?php if ( $first_month_free ): ?>
-										<span><?php _e( 'FIRST MONTH FREE!', '_it_start' ); ?></span>
-									<?php endif; ?>
-									<?php if ( $new_to_market ): ?>
-										<span><?php _e( 'NEW TO MARKET', '_it_start' ); ?></span>
-									<?php endif; ?>
+									<span><?php _e( 'NEW TO MARKET', '_it_start' ); ?></span>
 								</div>
 							<?php endif; ?>
 							<?php if ( $overview_content ): ?>
@@ -548,7 +552,7 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 							<?php if ( $subtitle ): ?>
 								<span class="subtitle">
 									<?php echo $subtitle; ?>
-							</span>
+								</span>
 							<?php endif; ?>
 							<?php if ( $content ): ?>
 								<?php echo $content; ?>
@@ -583,13 +587,13 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 										?>
 										<?php if ( $title || $value ): ?>
 											<li>
-											<span>
-												<img src="<?php echo $path; ?>" alt="">
-												<?php the_sub_field( 'title' ); ?>
-											</span>
 												<span>
-												<?php the_sub_field( 'value' ); ?>
-											</span>
+													<img src="<?php echo $path; ?>" alt="">
+													<?php the_sub_field( 'title' ); ?>
+												</span>
+												<span>
+													<?php the_sub_field( 'value' ); ?>
+												</span>
 											</li>
 										<?php endif; ?>
 									<?php endwhile; ?>
@@ -606,10 +610,10 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 											<?php while ( have_rows( 'supermarket' ) ) : the_row(); ?>
 												<li>
 													<span>
-													<?php the_sub_field( 'title' ); ?>
+														<?php the_sub_field( 'title' ); ?>
 													</span>
 													<span>
-													<?php the_sub_field( 'value' ); ?>
+														<?php the_sub_field( 'value' ); ?>
 													</span>
 												</li>
 											<?php endwhile; ?>
@@ -624,10 +628,10 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 											<?php while ( have_rows( 'restaurants_&_bars' ) ) : the_row(); ?>
 												<li>
 													<span>
-													<?php the_sub_field( 'title' ); ?>
+														<?php the_sub_field( 'title' ); ?>
 													</span>
 													<span>
-													<?php the_sub_field( 'value' ); ?>
+														<?php the_sub_field( 'value' ); ?>
 													</span>
 												</li>
 											<?php endwhile; ?>
@@ -671,7 +675,7 @@ $query = new WP_Query( $args ); ?>
 			<div class="row appartaments__grid">
 				<?php while ( $query->have_posts() ): $query->the_post(); ?>
 					<div class="col-lg-4 col-md-6">
-<!--						--><?php //get_template_part( 'template-parts/builder/components/appartament_item' ); ?>
+						<!--						--><?php //get_template_part( 'template-parts/builder/components/appartament_item' ); ?>
 						<?php get_template_part( 'template-parts/builder/components/new_appartament_item' ); ?>
 					</div>
 				<?php endwhile; ?>

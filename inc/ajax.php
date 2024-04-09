@@ -755,19 +755,24 @@ function ajax_new_listing() {
 		update_field( 'price', intval( $new_price ), $id ); // Update the 'price' field value
 	}
 
+	if ( isset( $_POST['new_price'] ) ) {
+		$new_price = $_POST['new_price'];
+		update_field( 'new_price', intval( $new_price ), $id ); // Update the 'new_price' field value
+	}
+
 	if ( isset( $_POST['bedrooms'] ) ) {
-		$new_price = $_POST['bedrooms'];
-		update_field( 'bedrooms', intval( $new_price ), $id ); // Update the 'bedrooms' field value
+		$bedrooms = $_POST['bedrooms'];
+		update_field( 'bedrooms', intval( $bedrooms ), $id ); // Update the 'bedrooms' field value
 	}
 
 	if ( isset( $_POST['bathrooms'] ) ) {
-		$new_price = $_POST['bathrooms'];
-		update_field( 'bathrooms', intval( $new_price ), $id ); // Update the 'bathrooms' field value
+		$bathrooms = $_POST['bathrooms'];
+		update_field( 'bathrooms', intval( $bathrooms ), $id ); // Update the 'bathrooms' field value
 	}
 
 	if ( isset( $_POST['squares_ft'] ) ) {
-		$new_price = $_POST['squares_ft'];
-		update_field( 'squares_ft', intval( $new_price ), $id ); // Update the 'squares_ft' field value
+		$squares_ft = $_POST['squares_ft'];
+		update_field( 'squares_ft', intval( $squares_ft ), $id ); // Update the 'squares_ft' field value
 	}
 
 	if ( isset( $_POST['move_in'] ) ) {
@@ -789,13 +794,6 @@ function ajax_new_listing() {
 	}
 	update_field( 'new_to_market', $new_to_market, $id ); // Update the 'new_to_market' field value
 
-	// $first_month_free
-	if ( isset( $_POST['first_month_free'] ) ) {
-		$first_month_free = true;
-	} else {
-		$first_month_free = false;
-	}
-	update_field( 'first_month_free', $first_month_free, $id ); // Update the 'first_month_free' field value
 
 	if ( isset( $_POST['user_agent'] ) ) {
 		$move_in = $_POST['user_agent'];

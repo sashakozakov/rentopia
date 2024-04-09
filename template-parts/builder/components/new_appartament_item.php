@@ -2,10 +2,10 @@
 
 $buildings_subtitle = get_field( 'buildings_subtitle' );
 $price              = get_field( 'price' );
+$new_price          = get_field( 'new_price' );
 $bedrooms           = get_field( 'bedrooms' );
 $bathrooms          = get_field( 'bathrooms' );
 $gallery            = get_field( 'gallery' );
-$first_month_free   = get_field( 'first_month_free' );
 ?>
 
 <div class="new_appartament__item">
@@ -37,27 +37,28 @@ $first_month_free   = get_field( 'first_month_free' );
 
 
 			<button class="slider__btn slider__btn--left">
-			<svg width="22" height="27" viewBox="0 0 22 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<g filter="url(#filter0_d_42_152)">
-					<path
-						d="M15.5498 19.0326L10.2455 13.7167L15.5498 8.40076L13.9168 6.76776L6.9679 13.7167L13.9168 20.6656L15.5498 19.0326Z"
-						fill="white"/>
-				</g>
-				<defs>
-					<filter id="filter0_d_42_152" x="0.650691" y="0.450556" width="21.2163" height="26.5323"
-							filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-						<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-						<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-									   result="hardAlpha"/>
-						<feOffset/>
-						<feGaussianBlur stdDeviation="3.1586"/>
-						<feComposite in2="hardAlpha" operator="out"/>
-						<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
-						<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_42_152"/>
-						<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_42_152" result="shape"/>
-					</filter>
-				</defs>
-			</svg>
+				<svg width="22" height="27" viewBox="0 0 22 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<g filter="url(#filter0_d_42_152)">
+						<path
+							d="M15.5498 19.0326L10.2455 13.7167L15.5498 8.40076L13.9168 6.76776L6.9679 13.7167L13.9168 20.6656L15.5498 19.0326Z"
+							fill="white"/>
+					</g>
+					<defs>
+						<filter id="filter0_d_42_152" x="0.650691" y="0.450556" width="21.2163" height="26.5323"
+								filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+							<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+							<feColorMatrix in="SourceAlpha" type="matrix"
+										   values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+										   result="hardAlpha"/>
+							<feOffset/>
+							<feGaussianBlur stdDeviation="3.1586"/>
+							<feComposite in2="hardAlpha" operator="out"/>
+							<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+							<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_42_152"/>
+							<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_42_152" result="shape"/>
+						</filter>
+					</defs>
+				</svg>
 			</button>
 			<button class="slider__btn slider__btn--right">
 				<svg width="22" height="27" viewBox="0 0 22 27" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -128,20 +129,21 @@ $first_month_free   = get_field( 'first_month_free' );
 			<div class="price_block">
 				<?php if ( $price ):
 					$price = number_format( $price, 0, '.', ',' );
-					?>
-					<?php if ( $first_month_free ): ?>
-					<strong class="d-block new_appartament__item--price actual_price">
-						$0,000 /<?php _e( 'Month', '_rentopia' ); ?>
-					</strong>
-					<del class="new_appartament__item--price">
-						$<?php echo $price; ?>/<?php _e( 'Month', '_rentopia' ); ?>
-					</del>
+					if ( $new_price ):
+						$new_price = number_format( $new_price, 0, '.', ',' );
+						?>
+						<strong class="d-block new_appartament__item--price actual_price">
+							$<?php echo $new_price; ?> /<?php _e( 'Month', '_rentopia' ); ?>
+						</strong>
+						<del class="new_appartament__item--price">
+							$<?php echo $price; ?>/<?php _e( 'Month', '_rentopia' ); ?>
+						</del>
 
-				<?php else: ?>
-					<strong class="d-block new_appartament__item--price">
-						$<?php echo $price; ?>/<?php _e( 'Month', '_rentopia' ); ?>
-					</strong>
-				<?php endif; ?>
+					<?php else: ?>
+						<strong class="d-block new_appartament__item--price">
+							$<?php echo $price; ?>/<?php _e( 'Month', '_rentopia' ); ?>
+						</strong>
+					<?php endif; ?>
 				<?php endif; ?>
 			</div>
 		</div>

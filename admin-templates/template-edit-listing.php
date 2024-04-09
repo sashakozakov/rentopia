@@ -96,6 +96,11 @@ if ( is_user_logged_in() && ( in_array( 'manager', (array) $user->roles ) || in_
 		update_field( 'price', intval( $new_price ), $_GET['id'] ); // Update the 'price' field value
 	}
 
+	if ( isset( $_POST['new_price'] ) ) {
+		$new_price = $_POST['new_price'];
+		update_field( 'new_price', intval( $new_price ), $_GET['id'] ); // Update the 'new_price' field value
+	}
+
 	if ( isset( $_POST['bedrooms'] ) ) {
 		$bedrooms = $_POST['bedrooms'];
 		update_field( 'bedrooms', intval( $bedrooms ), $_GET['id'] ); // Update the 'bedrooms' field value
@@ -149,14 +154,6 @@ if ( is_user_logged_in() && ( in_array( 'manager', (array) $user->roles ) || in_
 		$new_to_market = false;
 	}
 	update_field( 'new_to_market', $new_to_market, $_GET['id'] ); // Update the 'new_to_market' field value
-
-	// $first_month_free
-	if ( isset( $_POST['first_month_free'] ) ) {
-		$first_month_free = true;
-	} else {
-		$first_month_free = false;
-	}
-	update_field( 'first_month_free', $first_month_free, $_GET['id'] ); // Update the 'first_month_free' field value
 
 	if ( isset( $_POST['user_agent'] ) ) {
 		$move_in = $_POST['user_agent'];
@@ -291,14 +288,23 @@ if ( is_user_logged_in() && ( in_array( 'manager', (array) $user->roles ) || in_
 						</div>
 					</div>
 				</div>
-				<div class="col-xxl-2 col-lg-2 col-md-4">
+				<div class="col-xl-1 col-lg-3 col-md-2">
 					<label>
 						<span><?php _e( 'Price', '_it_start' ); ?></span>
 						<span class="price_input">
-						<input type="text" name="price" id="price"
-							   value="<?php echo get_field( 'price', $_GET['id'] ); ?>"
-							   placeholder="00,000">
-							/<?php _e( 'month', '_it_start' ); ?>
+							<input type="text" name="price" id="price"
+								   value="<?php echo get_field( 'price', $_GET['id'] ); ?>"
+								   placeholder="00,000">
+						</span>
+					</label>
+				</div>
+				<div class="col-xxl-1 col-xl-2 col-lg-3 col-md-2">
+					<label>
+						<span><?php _e( 'New Price', '_it_start' ); ?></span>
+						<span class="price_input">
+							<input type="text" name="new_price" id="new_price"
+								   value="<?php echo get_field( 'new_price', $_GET['id'] ); ?>"
+								   placeholder="00,000">
 						</span>
 					</label>
 				</div>
@@ -363,11 +369,6 @@ if ( is_user_logged_in() && ( in_array( 'manager', (array) $user->roles ) || in_
 							<input type="checkbox"
 								   name="new_to_market" <?php echo get_field( 'new_to_market', $_GET['id'] ) ? 'checked' : ''; ?>>
 							<span><?php _e( 'New to Market', '_it_start' ); ?></span>
-						</label>
-						<label class="label_checkbox">
-							<input type="checkbox"
-								   name="first_month_free" <?php echo get_field( 'first_month_free', $_GET['id'] ) ? 'checked' : ''; ?>>
-							<span><?php _e( 'First Month Free', '_it_start' ); ?></span>
 						</label>
 					</div>
 				</div>

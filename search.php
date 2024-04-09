@@ -23,7 +23,7 @@ $filtersearch  = $_GET['filtersearch'] ? $_GET['filtersearch'] : null;
 		$background_url   = wp_get_attachment_image_url( $background, 'full' );
 		?>
 		<section class="hero_section bg d-flex flex-wrap"
-				 style="background-image: url(<?php echo esc_url($background_url); ?>)">
+				 style="background-image: url(<?php echo esc_url( $background_url ); ?>)">
 			<svg width="1728" height="204" viewBox="0 0 1728 204" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path
 					d="M829.641 171C504.971 172.145 0 112.5 0 112.5V204H1728V0C1728 0 1672.71 37.0014 1630.69 57C1571.77 85.0433 1535.98 95.498 1472.69 112.5C1388.62 135.082 1339.31 141.12 1253.86 151.586L1250.48 152C1087.05 172.02 994.303 170.419 829.641 171Z"
@@ -122,22 +122,7 @@ $filtersearch  = $_GET['filtersearch'] ? $_GET['filtersearch'] : null;
 				);
 			}
 
-			if ( $bedrooms && $price ) {
-				$args['meta_query'] = array(
-					'relation' => 'AND',
-					array(
-						'key'      => 'bedrooms',
-						'value'    => $bedrooms,
-						'operator' => 'IN'
-					),
-					array(
-						'key'     => 'price',
-						'value'   => $prices,
-						'type'    => 'numeric',
-						'compare' => 'BETWEEN'
-					),
-				);
-			} elseif ( $bedrooms ) {
+			if ( $bedrooms ) {
 
 				$args['meta_query'] = array(
 					'relation' => 'AND',
@@ -147,9 +132,16 @@ $filtersearch  = $_GET['filtersearch'] ? $_GET['filtersearch'] : null;
 						'operator' => 'IN'
 					),
 				);
-			} elseif ( $price ) {
+			}
+			if ( $price ) {
 				$args['meta_query'] = array(
-					'relation' => 'AND',
+					'relation' => 'OR',
+					array(
+						'key'     => 'new_price',
+						'value'   => $prices,
+						'type'    => 'numeric',
+						'compare' => 'BETWEEN'
+					),
 					array(
 						'key'     => 'price',
 						'value'   => $prices,

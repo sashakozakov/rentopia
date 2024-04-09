@@ -81,13 +81,21 @@ if ( is_user_logged_in() && ( in_array( 'manager', (array) $user->roles ) || in_
 						</div>
 					</div>
 				</div>
-				<div class="col-xxl-2 col-lg-2 col-md-4">
+				<div class="col-xl-1 col-lg-3 col-md-2">
 					<label>
 						<span><?php _e( 'Price', '_it_start' ); ?></span>
 						<span class="price_input">
-						<input type="text" name="price" id="price"
-							   placeholder="00,000">
-							/<?php _e( 'month', '_it_start' ); ?>
+							<input type="text" name="price" id="price"
+								   placeholder="00,000">
+						</span>
+					</label>
+				</div>
+				<div class="col-xxl-1 col-xl-2 col-lg-3 col-md-2">
+					<label>
+						<span><?php _e( 'New Price', '_it_start' ); ?></span>
+						<span class="price_input">
+							<input type="text" name="new_price" id="new_price"
+								   placeholder="00,000">
 						</span>
 					</label>
 				</div>
@@ -140,13 +148,8 @@ if ( is_user_logged_in() && ( in_array( 'manager', (array) $user->roles ) || in_
 					<div class="label_checkbox_group">
 						<label class="label_checkbox">
 							<input type="checkbox"
-								   name="first_month_free">
-							<span><?php _e( 'New to Market', '_it_start' ); ?></span>
-						</label>
-						<label class="label_checkbox">
-							<input type="checkbox"
 								   name="new_to_market">
-							<span><?php _e( 'First Month Free', '_it_start' ); ?></span>
+							<span><?php _e( 'New to Market', '_it_start' ); ?></span>
 						</label>
 					</div>
 				</div>
