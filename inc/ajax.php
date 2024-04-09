@@ -61,7 +61,7 @@ add_action( 'wp_ajax_load_more_portfolio', 'load_more_portfolio' );
 function load_more_portfolio() {
 
 	$next   = isset( $_POST['next'] ) ? intval( $_POST['next'] ) : 1;
-	$pageID = isset( $_POST['pageID'] ) ? intval( $_POST['pageID'] ) : 1;
+	$pageID = isset( $_POST['pageID'] ) ?? '';
 
 	$args  = array(
 		'post_type'      => 'apartment',
