@@ -261,7 +261,16 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 						<a href="#images"><?php _e( 'Images', '_it_start' ); ?></a>
 					<?php endif; ?>
 					<?php if ( have_rows( 'neighborhood' ) ) : ?>
-						<a href="#neighborhood"><?php _e( 'Neighborhood', '_it_start' ); ?></a>
+						<?php while ( have_rows( 'neighborhood' ) ) : the_row();
+							$neighborhood_title = get_sub_field( 'title' );
+							$subtitle           = get_sub_field( 'subtitle' );
+							$content            = get_sub_field( 'content' );
+							$image              = get_sub_field( 'image' );
+							?>
+							<?php if ( $neighborhood_title || $subtitle || $content || $image ): ?>
+								<a href="#neighborhood"><?php _e( 'Neighborhood', '_it_start' ); ?></a>
+							<?php endif; ?>
+						<?php endwhile; ?>
 					<?php endif; ?>
 					<a href="#nearby"><?php _e( 'Nearby', '_it_start' ); ?></a>
 				</div>
@@ -279,7 +288,16 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 					<a href="#images"><?php _e( 'Images', '_it_start' ); ?></a>
 				<?php endif; ?>
 				<?php if ( have_rows( 'neighborhood' ) ) : ?>
-					<a href="#neighborhood"><?php _e( 'Neighborhood', '_it_start' ); ?></a>
+					<?php while ( have_rows( 'neighborhood' ) ) : the_row();
+						$neighborhood_title = get_sub_field( 'title' );
+						$subtitle           = get_sub_field( 'subtitle' );
+						$content            = get_sub_field( 'content' );
+						$image              = get_sub_field( 'image' );
+						?>
+						<?php if ( $neighborhood_title || $subtitle || $content || $image ): ?>
+							<a href="#neighborhood"><?php _e( 'Neighborhood', '_it_start' ); ?></a>
+						<?php endif; ?>
+					<?php endwhile; ?>
 				<?php endif; ?>
 				<a href="#nearby"><?php _e( 'Nearby', '_it_start' ); ?></a>
 			</div>
@@ -385,7 +403,7 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 
 					<?php get_template_part( 'template-parts/builder/components/small_agent_block', null, [
 						'class'            => 'visible-md-up',
-						'preview_agent_id' => $user_agent
+						'preview_agent_id' => $user_agent,
 					] ); ?>
 
 					<?php if ( $overview_content || $new_to_market ): ?>
@@ -521,48 +539,50 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 
 
 <?php if ( have_rows( 'neighborhood' ) ) : ?>
-	<div class="anchor" id="neighborhood"></div>
 	<?php while ( have_rows( 'neighborhood' ) ) : the_row();
 		$neighborhood_title = get_sub_field( 'title' );
 		$subtitle           = get_sub_field( 'subtitle' );
 		$content            = get_sub_field( 'content' );
 		$image              = get_sub_field( 'image' );
 		?>
-		<section class="module_blog_post">
+		<?php if ( $neighborhood_title || $subtitle || $content || $image ): ?>
+			<div class="anchor" id="neighborhood"></div>
+			<section class="module_blog_post">
 
-			<svg class="svg svg_13 visible-md-up" width="374" height="318" viewBox="0 0 374 318" fill="none"
-				 xmlns="http://www.w3.org/2000/svg">
-				<use xlink:href="#svg_elem_13"></use>
-			</svg>
+				<svg class="svg svg_13 visible-md-up" width="374" height="318" viewBox="0 0 374 318" fill="none"
+					 xmlns="http://www.w3.org/2000/svg">
+					<use xlink:href="#svg_elem_13"></use>
+				</svg>
 
-			<div class="container">
-				<div class="row align-items-center flex-md-row-reverse">
-					<?php if ( $image ) : ?>
-						<div class="col-lg-7 col-md-6 text-center text-md-right">
-							<?php echo wp_get_attachment_image( $image, 'full' ); ?>
-						</div>
-					<?php endif; ?>
-					<div class="col-lg-5 col-md-6">
-						<div class="module_blog_post--content text-center text-md-left text-grey">
-							<?php if ( $neighborhood_title ): ?>
-								<h4>
-									<?php echo $neighborhood_title; ?>
-								</h4>
-							<?php endif; ?>
-							<?php if ( $subtitle ): ?>
-								<span class="subtitle">
-									<?php echo $subtitle; ?>
-								</span>
-							<?php endif; ?>
-							<?php if ( $content ): ?>
-								<?php echo $content; ?>
-							<?php endif; ?>
+				<div class="container">
+					<div class="row align-items-center flex-md-row-reverse">
+						<?php if ( $image ) : ?>
+							<div class="col-lg-7 col-md-6 text-center text-md-right">
+								<?php echo wp_get_attachment_image( $image, 'full' ); ?>
+							</div>
+						<?php endif; ?>
+						<div class="col-lg-5 col-md-6">
+							<div class="module_blog_post--content text-center text-md-left text-grey">
+								<?php if ( $neighborhood_title ): ?>
+									<h4>
+										<?php echo $neighborhood_title; ?>
+									</h4>
+								<?php endif; ?>
+								<?php if ( $subtitle ): ?>
+									<span class="subtitle">
+										<?php echo $subtitle; ?>
+									</span>
+								<?php endif; ?>
+								<?php if ( $content ): ?>
+									<?php echo $content; ?>
+								<?php endif; ?>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
-		</section>
+			</section>
+		<?php endif; ?>
 
 	<?php endwhile; ?>
 <?php endif; ?>
@@ -658,7 +678,7 @@ $linkedin_link = sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%
 $args = array(
 //	'post_type'      => 'apartment',
 	'posts_per_page' => 3,
-	'post__not_in'   => [ get_the_ID() ]
+	'post__not_in'   => [ get_the_ID() ],
 );
 if ( is_singular( 'apartment' ) ) {
 	$args['post_type'] = 'apartment';

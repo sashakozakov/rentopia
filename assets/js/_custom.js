@@ -756,7 +756,7 @@ function handleIntersection(entries, observer) {
 		// If the button is in the viewport
 		if (entry.isIntersecting) {
 			// Trigger a click event on the button
-			const loadMoreBtn = document.querySelector('.search-results .load-more-btn');
+			const loadMoreBtn = document.querySelector('body .load-more-btn');
 			loadMoreBtn.click();
 		}
 	});
@@ -766,10 +766,10 @@ function handleIntersection(entries, observer) {
 const observer = new IntersectionObserver(handleIntersection);
 
 // Target the button you want to observe
-const loadMoreBtn = document.querySelector('.search-results .load-more-btn');
+const loadMoreBtn = document.querySelector('body .load-more-btn');
 
 // Start observing the button
-if (loadMoreBtn && $('.search-results')) {
+if (loadMoreBtn) {
 	observer.observe(loadMoreBtn);
 }
 
