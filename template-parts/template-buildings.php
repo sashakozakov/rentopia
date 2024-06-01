@@ -34,7 +34,7 @@ the_post();
 				$args  = array(
 					'post_type'      => 'building',
 					'posts_per_page' => 12,
-					'order'          => 'ASC',
+					'order'          => 'DESC',
 					'orderby'        => 'meta_value_num',
 					'post_status'    => 'publish',
 					'paged'          => $paged,

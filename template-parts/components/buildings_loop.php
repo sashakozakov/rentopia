@@ -1,4 +1,3 @@
-<!--<div class="col-xl-8 col-lg-7 col-sm-6">-->
 <div class="col-md-4 col-sm-6">
 	<a href="<?php the_permalink(); ?>" class="building__item">
 			<span class="building__item--label hidden-lg-up">
