@@ -72,6 +72,14 @@ if ( $preview ) {
 	) );
 	$collections_terms = get_the_terms( $post->ID, 'collections' );
 }
+$price     = str_replace( ' ', '', $price ); // Remove spaces
+$price     = preg_replace( '/[^0-9,.]/', '', $price ); // Remove any symbols except commas and dots
+$price     = preg_replace( '/\.\d+/', '', $price ); // Remove numbers after the dot
+$price     = str_replace( ',', '', $price ); // Remove commas
+$new_price = str_replace( ' ', '', $new_price ); // Remove spaces
+$new_price = preg_replace( '/[^0-9,.]/', '', $new_price ); // Remove any symbols except commas and dots
+$new_price = preg_replace( '/\.\d+/', '', $new_price ); // Remove numbers after the dot
+$new_price = str_replace( ',', '', $new_price ); // Remove commas
 
 
 //gallery section

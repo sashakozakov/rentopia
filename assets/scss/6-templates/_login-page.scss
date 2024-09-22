@@ -115,6 +115,11 @@
 			.message {
 				border-color: $primary;
 			}
+			.message,
+			.notice,
+			.success {
+				height: auto;
+			}
 
 			form {
 				border: none;
@@ -122,6 +127,15 @@
 
 				label {
 					display: none;
+				}
+				.pw-weak {
+					input[type=checkbox]:checked:before {
+						width: 21px;
+						height: 21px;
+					}
+					label {
+						display: inline-block;
+					}
 				}
 
 				input[type=password],
@@ -154,16 +168,15 @@
 
 				p.submit {
 					text-align: center;
+					justify-content: center;
 
 					.button-primary {
 						@extend .btn;
 						float: none;
+						width: 100%;
 						@include min(lg) {
 							padding-left: 65px;
 							padding-right: 65px;
-						}
-						@include max(md) {
-							width: 100%;
 						}
 					}
 				}
@@ -196,6 +209,17 @@
 		z-index: 1;
 		@include min(md) {
 			margin-top: -130px;
+		}
+	}
+
+	&.login-action-resetpass {
+		.login-layout .login-box #backtoblog {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			a {
+				@extend .btn;
+			}
 		}
 	}
 

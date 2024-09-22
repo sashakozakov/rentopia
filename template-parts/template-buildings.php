@@ -30,14 +30,68 @@ the_post();
  */ ?>
 
 				<?php
-				$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-				$args  = array(
+//				$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+//				$args  = array(
+//					'post_type'      => 'building',
+//					'posts_per_page' => 12,
+//					'order'          => 'DESC',
+//					'orderby'        => 'meta_value_num',
+//					'post_status'    => 'publish',
+//					'paged'          => $paged,
+//					'meta_query'     => array(
+//						'relation' => 'OR',
+//						array(
+//							'key'     => '_thumbnail_id',
+//							'compare' => 'EXISTS',
+//						),
+//						array(
+//							'key'     => '_thumbnail_id',
+//							'compare' => 'NOT EXISTS',
+//						),
+//					),
+//				);
+				$apartment_query_args = array(
+					'post_type'      => 'apartment',
+					'posts_per_page' => -1, // Get all apartments
+					'fields'         => 'ids', // Only get post IDs
+					'post_status'    => 'publish',
+				);
+
+				$apartment_query = new WP_Query($apartment_query_args);
+				$building_ids = array();
+
+				// Loop through the apartments and collect building IDs
+				if ($apartment_query->have_posts()) {
+					while ($apartment_query->have_posts()) {
+						$apartment_query->the_post();
+						$connected_building = get_field('connected_building'); // Assuming the field name is 'connected_building'
+						if ($connected_building) {
+							// If connected_building is a single ID
+							if (is_numeric($connected_building)) {
+								$building_ids[] = $connected_building;
+							}
+							// If connected_building is an array of IDs
+							elseif (is_array($connected_building)) {
+								$building_ids = array_merge($building_ids, $connected_building);
+							}
+						}
+					}
+					wp_reset_postdata();
+				}
+
+				$building_ids = array_unique($building_ids); // Ensure IDs are unique
+
+				// Building Query
+				$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+				$building_args = array(
 					'post_type'      => 'building',
-					'posts_per_page' => 12,
+//					'posts_per_page' => 12,
+					'posts_per_page' => -1,
 					'order'          => 'DESC',
 					'orderby'        => 'meta_value_num',
 					'post_status'    => 'publish',
 					'paged'          => $paged,
+					'post__in'       => $building_ids, // Filter by building IDs
 					'meta_query'     => array(
 						'relation' => 'OR',
 						array(
@@ -50,7 +104,7 @@ the_post();
 						),
 					),
 				);
-				$query = new WP_Query( $args );
+				$query = new WP_Query( $building_args );
 				$count = $query->post_count;
 
 				?>

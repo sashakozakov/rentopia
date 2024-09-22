@@ -100,6 +100,36 @@ function load_more_portfolio() {
 add_action( 'wp_ajax_nopriv_load_more_buildings', 'load_more_buildings' );
 add_action( 'wp_ajax_load_more_buildings', 'load_more_buildings' );
 function load_more_buildings() {
+	$apartment_query_args = array(
+		'post_type'      => 'apartment',
+		'posts_per_page' => -1, // Get all apartments
+		'fields'         => 'ids', // Only get post IDs
+		'post_status'    => 'publish',
+	);
+
+	$apartment_query = new WP_Query($apartment_query_args);
+	$building_ids = array();
+
+	// Loop through the apartments and collect building IDs
+	if ($apartment_query->have_posts()) {
+		while ($apartment_query->have_posts()) {
+			$apartment_query->the_post();
+			$connected_building = get_field('connected_building'); // Assuming the field name is 'connected_building'
+			if ($connected_building) {
+				// If connected_building is a single ID
+				if (is_numeric($connected_building)) {
+					$building_ids[] = $connected_building;
+				}
+				// If connected_building is an array of IDs
+				elseif (is_array($connected_building)) {
+					$building_ids = array_merge($building_ids, $connected_building);
+				}
+			}
+		}
+		wp_reset_postdata();
+	}
+
+	$building_ids = array_unique($building_ids); // Ensure IDs are unique
 
 	$next = isset( $_POST['next'] ) ? intval( $_POST['next'] ) : 1;
 //	$next = $_POST['next'];
@@ -111,6 +141,7 @@ function load_more_buildings() {
 		'order'          => 'DESC',
 		'orderby'        => 'meta_value_num',
 		'post_status'    => 'publish',
+		'post__in'       => $building_ids, // Filter by building IDs
 		'meta_query'     => array(
 			'relation' => 'OR',
 			array(

@@ -25,6 +25,7 @@ $enable_to_top     = get_field( 'enable_to_top', 'option' );
 		<div class="row flex-md-row-reverse">
 			<?php if ( $footer_form ) : ?>
 				<div class="col-md-6 offset-lg-1 new_footer__right">
+				<div id="contact-form" class="anchor"></div>
 					<?php if ( $footer_form_title ): ?>
 						<h3>
 							<?php echo $footer_form_title; ?>

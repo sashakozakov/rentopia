@@ -27,13 +27,30 @@ $classes .= $margin_bottom ? ' mb-' . $margin_bottom : '';
 	<?php if ( $featured_apartments ) : ?>
 		<div class="features_slider">
 			<div class="swiper-wrapper">
-				<?php foreach ( $featured_apartments as $post ) : ?>
-					<?php setup_postdata( $post ); ?>
-					<div class="swiper-slide">
-						<?php get_template_part( 'template-parts/builder/components/new_appartament_item' ); ?>
-					</div>
-				<?php endforeach; ?>
-				<?php wp_reset_postdata(); ?>
+<!--				--><?php //foreach ( $featured_apartments as $post ) : ?>
+<!--					--><?php //setup_postdata( $post ); ?>
+<!--					<div class="swiper-slide">-->
+<!--						--><?php //get_template_part( 'template-parts/builder/components/new_appartament_item' ); ?>
+<!--					</div>-->
+<!--				--><?php //endforeach; ?>
+<!--				--><?php //wp_reset_postdata(); ?>
+
+
+				<?php
+				$args  = array(
+					'post_type'      => 'apartment',
+					'posts_per_page' => -1,
+					'post__in'   => $featured_apartments,
+				);
+				$query = new WP_Query( $args ); ?>
+				<?php if ( $query->have_posts() ): ?>
+					<?php while ( $query->have_posts() ): $query->the_post(); ?>
+						<div class="swiper-slide">
+							<?php get_template_part( 'template-parts/builder/components/new_appartament_item' ); ?>
+						</div>
+					<?php endwhile; ?>
+				<?php endif;
+				wp_reset_postdata(); ?>
 			</div>
 			<div class="swiper-pagination new_pagination_style"></div>
 		</div>

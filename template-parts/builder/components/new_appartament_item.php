@@ -127,10 +127,23 @@ $gallery            = get_field( 'gallery' );
 				</div>
 			<?php endif; ?>
 			<div class="price_block">
-				<?php if ( $price ):
-					$price = number_format( $price, 0, '.', ',' );
-					if ( $new_price ):
-						$new_price = number_format( $new_price, 0, '.', ',' );
+				<?php
+				$price     = str_replace( ' ', '', $price ); // Remove spaces
+				$price     = preg_replace( '/[^0-9,.]/', '', $price ); // Remove any symbols except commas and dots
+				$price     = preg_replace( '/\.\d+/', '', $price ); // Remove numbers after the dot
+				$price     = str_replace( ',', '', $price ); // Remove commas
+				$new_price = str_replace( ' ', '', $new_price ); // Remove spaces
+				$new_price = preg_replace( '/[^0-9,.]/', '', $new_price ); // Remove any symbols except commas and dots
+				$new_price = preg_replace( '/\.\d+/', '', $new_price ); // Remove numbers after the dot
+				$new_price = str_replace( ',', '', $new_price ); // Remove commas
+//				if ( $price ):
+				if ( is_numeric($price) ):
+//					$price = number_format( $price, 0, '.', ',' );
+					$price = number_format( (float) $price, 0, '.', ',' );
+//					if ( $new_price ):
+					if ( isset($new_price) && is_numeric($new_price) ):
+//						$new_price = number_format( $new_price, 0, '.', ',' );
+						$new_price = number_format( (float) $new_price, 0, '.', ',' );
 						?>
 						<strong class="d-block new_appartament__item--price actual_price">
 							$<?php echo $new_price; ?> /<?php _e( 'Month', '_rentopia' ); ?>
