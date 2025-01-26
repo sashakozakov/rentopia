@@ -85,8 +85,7 @@ the_post();
 				$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 				$building_args = array(
 					'post_type'      => 'building',
-//					'posts_per_page' => 12,
-					'posts_per_page' => -1,
+					'posts_per_page' => 12,
 					'order'          => 'DESC',
 					'orderby'        => 'meta_value_num',
 					'post_status'    => 'publish',

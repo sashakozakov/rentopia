@@ -15,7 +15,7 @@ $gallery            = get_field( 'gallery' );
 			<?php if ( has_post_thumbnail() ): ?>
 				<div class="slide">
 					<a href="<?php the_permalink(); ?>" class="has_img">
-						<?php the_post_thumbnail( 'full', array( "class" => "img-cover" ) ); ?>
+						<?php the_post_thumbnail( 'large', array( "class" => "img-cover" ) ); ?>
 					</a>
 				</div>
 			<?php endif; ?>

@@ -59,7 +59,6 @@ if ( $preview ) {
 	$user_agent       = get_field( 'user_agent' );
 
 	$connected_building = get_field( 'connected_building' );
-	echo $connected_building;
 	$building_terms    = wp_get_object_terms( $connected_building ? $connected_building : $post->ID, 'building_amenities', array(
 //		'taxonomy' => 'building_amenities',
 		'orderby' => 'term_id',

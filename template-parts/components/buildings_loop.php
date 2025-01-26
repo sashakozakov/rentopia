@@ -6,7 +6,7 @@
 		<div class="building__item--img">
 			<div>
 				<?php if ( has_post_thumbnail() ): ?>
-					<?php the_post_thumbnail(); ?>
+					<?php the_post_thumbnail('large'); ?>
 				<?php else: ?>
 					<?php it_image_placeholder(); ?>
 				<?php endif; ?>
